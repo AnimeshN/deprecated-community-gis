@@ -28,7 +28,7 @@ pip3 install -r requirments.txt
 ```
 sudo apt-get install postgresql
 ```
-:hear_no_evil: setup database using postgres-setup.txt
+:hear_no_evil: setup database using [postgres-setup.txt](postgres-setup.txt)
 
 :pray: email at nautiyalanimesh@gmail.com for asking keys for projects
 
