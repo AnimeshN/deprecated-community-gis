@@ -1,0 +1,29 @@
+{% extends 'map/base.html' %}
+{% load static%}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Layers</h2>
+	<p><a href="{% url 'upload_layers'%}" class='btn btn-primary'>Upload Layer</a></p>
+	<table class='table'>
+		<thead>
+			<tr>
+				<th>Layer Name</th>
+				<th>Description</th>
+				<th>Uploaded on</th>
+				<!-- <th>Download</th> -->
+			</tr>
+		</thead>
+		<tbody>
+			{% for lyr in layers %}
+			<tr>
+				<td>{{ lyr.name_of_layer}}</td>
+				<td>{{ lyr.description}}</td>
+				<td>{{ lyr.created}}</td>
+				<!-- <td><a href = '{{ lyr.layer.url }}' class = 'btn btn-primary btn-sm' target='_bland' > Download </a></td> -->
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>				
+{% endif %}
+
+{% endblock %}

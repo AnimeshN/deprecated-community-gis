@@ -1,0 +1,31 @@
+{% extends 'map/base.html' %}
+{% load static%}
+{% block content %}
+{% if user.is_authenticated %}
+<table class='table text-center' style="width:100%;">
+		<thead>
+			<tr>
+                <th style="width:10%;">Username</th>
+                <th style="width:20%;">Full Name</th>
+				<th style="width:10%;">Layer Name</th>
+				<th style="width:40%;">Description</th>
+				<th style="width:10%;">Uploaded on</th>
+				<th style="width:10%;">Download</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for lyr in alllayers %}
+			<tr>
+                <td>{{ lyr.user }}</td>
+                <td>{{lyr.user.first_name}} {{lyr.user.last_name}}</td>
+				<td>{{ lyr.name_of_layer}}</td>
+				<td>{{ lyr.description}}</td>
+				<td>{{ lyr.created}}</td>
+				<td><a href = '{{ lyr.layer.url }}' class = 'btn btn-primary btn-sm' target='_bland' > Download </a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>	
+{% endif %}
+
+{% endblock %}

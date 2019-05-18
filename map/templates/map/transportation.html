@@ -1,0 +1,1082 @@
+
+{% extends 'map/base.html'%}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<style>
+    
+.select {
+    background:rgb(255,255,255);
+}
+.select.highlight {
+    background:rgb(26, 255, 0);
+}
+</style>
+
+<div id="side-bar" style="background-color: rgba(0, 0, 0, 0.2);">
+<div class="">
+  <h2>Shahapur</h2>
+  <hr>
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:village')";>Village boundaries undivided thane</button></li>
+
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:v_28042019')";>Vertices</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:t_minidor_09052019_1')";>Minidor terminals</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:t_jeep_09052019')";>Jeep terminals</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:t_26042019')";>Termini</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:shahapur_taluka_boundary_validated')";>Shahapur Taluka Boundary with Census</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:rs_minidor_09052019')";>Route Segments Minidors</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:rs_jeep_09052019')";>Route Segments Jeeps</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:rs_auto_09052019')";>Route Segment Autos</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:rs_27042019')";>Route Segments MSRTC buses</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:roads_merged_07042019')";>All Roads MRSAC data</button></li>
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:rail')";>Train routes</button></li>    
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:p_28042019')";>Village Projections</button></li>  
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:epkm_mar_edgewise_15052019')";>EPKM per edge</button></li>  
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:edges_29042019')";>Edges
+     </button></li>  
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:count_services_jan19_15052019')";>Count of Bus services on POI
+     </button></li>  
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:centroid_village_polygons')";>Village Centroid
+     </button></li>  
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:abc_march_04052019')";>ABC operational data March
+     </button></li>  
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:abc_jan_04052019')";>ABC operational data Jan
+     </button></li>  
+     
+     <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:abc_feb_04052019')";>ABC operational data Feb
+     </button></li>  
+     
+     </button></li>  
+     
+     </button></li>  
+     
+    
+    
+  </ul>
+
+
+
+
+<!-- Checkbox: <input type="checkbox" id="myCheck"  onclick="myFunction(this)"><br>
+Checkbox: <input type="checkbox" id="myCheck1"  onclick="myFunction(this)"><br> -->
+
+
+</div>
+</div>
+        <!-- /view -->
+<script>
+    // function putLayer(layer){
+    //     mymap.setView([19.1334, 72.9133], 15);
+    //     source.getLayer(layer).addTo(mymap);
+    // }
+
+    // function removeLayer(layer){
+    //     source.getLayer(layer).addTo(mymap).remove();
+    // }
+    var myLayerList = [];
+    function putLayer(geonode_source){
+        mymap.setView([19.4559, 73.3296], 9);
+        var index = myLayerList.indexOf(geonode_source);
+        if(index >= 0){
+            console.log('remove'+geonode_source)
+            source.getLayer(geonode_source).addTo(mymap).remove(mymap);
+            myLayerList.splice(index,1);
+
+        }else{
+            console.log('add'+geonode_source);
+            // info.toFront(geonode_);
+            source.getLayer(geonode_source).addTo(mymap);
+            myLayerList.push(geonode_source);
+        }
+    }
+
+    $('.select').click(function () {
+        $(this).toggleClass('highlight')
+    })
+
+//     function myFunction(me) {
+//   var checkBox = document.getElementById("myCheck");
+//   var text = document.getElementById("text");
+//   if (checkBox.checked == true){
+//     console.log(me.id);
+//   } else {
+//      console.log('removed');
+//   }
+// }
+</script>
+        </div>
+    <div id="mapdiv" class="col-md-12"></div>
+<script>
+   
+
+                var source = L.wms.source(
+                    "http://13.82.229.27/geoserver/wfs",
+                    {
+                        "format": "image/png",
+                        "transparent": "true"
+                    }        
+                    );
+                
+                $(document).ready(function(){
+
+                    
+        // alert(form_data);                             
+        
+                    mymap = L.map('mapdiv', {center:[19.0760, 72.8777], zoom:13, zoomControl:false, attributionControl:false});
+                    lyrOSM = L.tileLayer.provider('OpenStreetMap.Mapnik');
+                    // lyrTopo = L.tileLayer.provider('OpenTopoMap');
+                    lyrImagery = L.tileLayer.provider('Esri.WorldImagery');
+                    // lyrOutdoors = L.tileLayer.provider('Thunderforest.Outdoors');
+                    // lyrWatercolor = L.tileLayer.provider('Stamen.Watercolor');
+                    mymap.addLayer(lyrOSM);
+                    
+                    // lyrChapultepec = L.imageOverlay('img/chapultepec.png', [[19.42993,-99.20843],[19.40621,-99.17453]], {opacity:0.5}).addTo(mymap);
+                    
+                    objBasemaps = {
+                        "Open Street Maps": lyrOSM,
+                        // "Topo Map":lyrTopo,
+                        "Imagery":lyrImagery
+                        // "Outdoors":lyrOutdoors,
+                        // "Watercolor":lyrWatercolor
+                    };
+                    
+                    objOverlays = {
+                        // "Chapultepec Image":lyrChapultepec
+                    };
+                    
+                    ctlLayers = L.control.layers(objBasemaps, objOverlays).addTo(mymap);
+                    
+                    ctlPan = L.control.pan().addTo(mymap);
+                    ctlZoomslider = L.control.zoomslider({position:'topright'}).addTo(mymap);
+                    
+                    // ctlMeasure = L.control.polylineMeasure().addTo(mymap);
+                    ctlSidebar = L.control.sidebar('side-bar').addTo(mymap);
+                    
+                    ctlEasybutton = L.easyButton('glyphicon-transfer', function(){
+                       ctlSidebar.toggle(); 
+                    }).addTo(mymap);
+
+                    $("#closebutton").click(function(){
+                        ctlSidebar.toggle();
+                    });
+
+                    var helloPopup = L.popup().setContent('<h1>About US</h1><br><i>Primary objective of communitygis is to provide educational platform for learners to learn about spatial information and learn how these  modern tools can be used to solve real life problems. <br/><br/>It creates a platform for people who range from those who can contribute data ( mobile based point data collection to digitization of published maps) to those who can analyse the data to infer useful social knowledge.                    <br/><br/>It is a digital contraption needed to collect, aggregate , access and analyse data  finally provide decision support for to manipulate reality.                    <br/><br/>Since all source code is published , under GPL, any one can reproduce the technology , without any permission from makerGHAT.This has been created by volunteers and coordinated by www.makerghat.org<i>');
+
+                    L.easyButton('glyphicon glyphicon-question-sign', function(btn, map){
+                        helloPopup.setLatLng(map.getCenter()).openOn(mymap);
+                    }).addTo(mymap);
+
+                    
+                    ctlSearch = L.Control.openCageSearch({key: '3c38d15e76c02545181b07d3f8cfccf0',limit: 10}).addTo(mymap);
+                    
+                    ctlAttribute = L.control.attribution({position:'bottomleft'}).addTo(mymap);
+                    ctlAttribute.addAttribution('OSM');
+                    ctlAttribute.addAttribution('&copy; <a href="http://www.makerghat.org">makerGHAT</a>');
+
+                    // ctlLogo = L.control.attribution({position:'bottomright'}).addTo(mymap);
+                    
+                    ctlScale = L.control.scale({position:'bottomleft', metric:false, maxWidth:200}).addTo(mymap);
+                    ctlMouseposition = L.control.mousePosition().addTo(mymap);
+                    
+                    popZocalo = L.popup({maxWidth:200,keepInView:true});
+                    popZocalo.setLatLng([19.43262, -99.13325]);
+                    popZocalo.setContent("<h2>Zocalo</h2><img src='img/zocalo.jpg' width='200px'>");
+                    
+                    mymap.on('contextmenu', function(e) {
+                        var dtCurrentTime = new Date();
+                        L.marker(e.latlng).addTo(mymap).bindPopup(e.latlng.toString()+"<br>"+dtCurrentTime.toString());
+                    });
+                    
+                    mymap.on('keypress', function(e) {
+                        if (e.originalEvent.key=="l") {
+                            mymap.locate();
+                        }
+                    });
+
+                    // var credctrl = L.controlCredits({
+                    //     image: "img/logo.png",
+                    //     link: "http://www.makerghat.org/",
+                    //     text: "Interactive mapping<br/>by makerGhat"
+                    // }).addTo(mymap);
+
+
+                    // var myIcon = L.icon({
+                    //     iconUrl: 'img/logo.png',
+                    //     iconSize: [38, 95],
+                    //     iconAnchor: [22, 94],
+                    //     popupAnchor: [-3, -76],
+                        
+                    // });
+                    // L.marker([50.505, 30.57], {icon: myIcon}).addTo(mymap);
+
+                    setTimeout(function () {
+                        credctrl.setText("Interactive mapping<br/>by GreenInfo Network");
+                    }, 5000);
+                    mymap.on('locationfound', function(e) {
+                        console.log('buildin');
+                        // if (mrkCurrentLocation) {
+                        //     mrkCurrentLocation.remove();
+                        // }
+                        // mrkCurrentLocation = L.circle(e.latlng, {radius:e.accuracy/2}).addTo(mymap);
+                        // mymap.setView(e.latlng, 14);
+                    });
+                    
+                    mymap.on('locationerror', function(e) {
+                        console.log(e);
+                        alert("Location was not found");
+                    })
+                    
+                    mymap.on('zoomend', function(){
+                        $("#zoom-level").html(mymap.getZoom());
+                    });
+                    
+                    mymap.on('moveend', function(){
+                        $("#map-center").html(LatLngToArrayString(mymap.getCenter()));
+                    });
+                    
+                    mymap.on('mousemove', function(e){
+                        $("#mouse-location").html(LatLngToArrayString(e.latlng));
+                    });
+                    
+                    $("#buildingLocate").click(function(){
+                        addBuildingLayer();
+                    });
+
+                    $("#buildseg").click(function(){
+                        addBuildsegLayer();
+                    });
+
+                     $("#buildcomp").click(function(){
+                        addBuildcompLayer();
+                    });
+
+                     $("#buildweight").click(function(){
+                        addBuildweightLayer();
+                    });
+
+                     $("#corporatorwise").click(function(){
+                        addCorporatorLayer();
+                    });
+
+                     $("#compseg").click(function(){
+                        addCorporatorSegLayer();
+                    });
+
+                    $("#roadLayer").click(function(){
+                        addRoadLayer();
+                    });
+                    
+                    $("#punebuild").click(function(){
+                        addPuneBuild();
+                    });
+
+                    $("#puneroad").click(function(){
+                        addPuneRoad();
+                    });
+                     $("#punephotos").click(function(){
+                        addPunePhotos();
+                    });
+                    
+                    $("#primary_school").click(function(){
+                        addPrimaryLayer();
+                    });
+
+                    $("#district_layer").click(function(){
+                        addDistrictLayer();
+                    });
+
+                    $("#ward_layer").click(function(){
+                        addWardLayer();
+                    });
+
+                    $("#village_layer").click(function(){
+                        addVillageLayer();
+                    });
+
+                    $("#hlpca").click(function(){
+                        addHLPCALayer();
+                    });
+
+                    $("#town2700_layer").click(function(){
+                        addTown2700Layer();
+                    });
+
+                    $("#bfhvl_layer").click(function(){
+                        addBFHVLLayer();
+                    });
+
+                    $("#bfr_layer").click(function(){
+                        addBFRLayer();
+                    });
+
+                    $("#hvl_layer").click(function(){
+                        addHVLLayer();
+                    });
+
+                    $("#mrl_layer").click(function(){
+                        addMRLLayer();
+                    });
+
+                     $("#voter_list").click(function(){
+                        addVoterList();
+                    });
+
+                    $("#osmb_layer").click(function(){
+                        addOSMBLayer();
+                    });
+
+                    $("#poly_layer").click(function(){
+                        addPolyLayer();
+                    });
+
+                    $("#pond_layer").click(function(){
+                        addPondLayer();
+                    });
+
+                    $("#railway_layer").click(function(){
+                        addRailLayer();
+                    });
+
+                    $("#lward_building_layer").click(function(){
+                        addLWardBuildingLayer();
+                    });
+
+                    $("#pads_boundary").click(function(){
+                        addPadsBoundaryLayer();
+                    });
+
+                    $("#pads_building").click(function(){
+                        addPadsBuildingLayer();
+                    });
+
+                    $("#pads_garden").click(function(){
+                        addPadsGardenLayer();
+                    });
+
+                    $("#pads_street").click(function(){
+                        addPadsStreetLayer();
+                    });
+
+
+                    $("#locatemumbai").click(function(){
+                        mymap.setView([19.0607, 72.8362], 13);
+                        // mymap.openPopup(popZocalo);
+                    });
+
+                    $("#voter_list").click(function(){
+                        mymap.setView([19.1733144,72.9337851], 17);
+                        // mymap.openPopup(popZocalo);
+                    });
+
+                     $("#locatepune").click(function(){
+                        mymap.setView([18.5938053,73.7911109], 17);
+                        // mymap.openPopup(popZocalo);
+                    });
+
+                    $("#locategoa").click(function(){
+                        mymap.setView([15.2993, 74.1240], 11);
+                        // mymap.openPopup(popZocalo);
+                    });
+
+                    $("#locateponda").click(function(){
+                        mymap.setView([15.3991, 74.0124], 15);
+                        // mymap.openPopup(popZocalo);
+                    });
+
+                    
+
+                    $("#locatepalghar").click(function(){
+                        mymap.setView([19.9365, 73.3404], 11);
+                        // mymap.openPopup(popZocalo);
+                    });
+
+                    $("#sward").click(function(){
+                        mymap.setView([19.1197, 72.9051], 15);
+                        // mymap.openPopup(popZocalo);
+                    });
+
+                    $("#lward").click(function(){
+                        mymap.setView([19.08799, 72.88656], 15);
+                        // mymap.openPopup(popZocalo);
+                    });
+
+                    $("#pads").click(function(){
+                        mymap.setView([19.1197, 72.9051], 15);
+                        // mymap.openPopup(popZocalo);
+                    });
+
+                    $("#ponda_lines").click(function(){
+                        addPondaLinesLayer();
+                    });
+
+                    $("#ponda_polygons").click(function(){
+                        addPondaPolygonsLayer();
+                    });
+
+                    $("#ponda_points").click(function(){
+                        addPondaPointsLayer();
+                    });
+
+                    $("#ponda_hospital").click(function(){
+                        addPondaHospitalLayer();
+                    });
+                    $("#ponda_school").click(function(){
+                        addPondaSchoolLayer();
+                    });
+                    $("#ponda_worship").click(function(){
+                        addPondaWorshipLayer();
+                    });
+                    $("#ponda_food").click(function(){
+                        addPondaFoodLayer();
+                    });
+                    $("#ponda_other").click(function(){
+                        addPondaOtherLayer();
+                    });
+
+                     $("#mokhada_village").click(function(){
+                        addMokhadaVillageLayer();
+                    });
+                    
+                    $("#sldOpacity").on('change', function(){
+                        $("#image-opacity").html(this.value);
+                        lyrChapultepec.setOpacity(this.value);
+                    });
+                }); //end of ready function
+               
+
+                function LatLngToArrayString(ll) {
+    //                console.log(ll);
+                    return "["+ll.lat.toFixed(5)+", "+ll.lng.toFixed(5)+"]";
+                }
+
+                function addMokhadaVillageLayer(){
+                    console.log('this is mokhada village layer');
+                    if(mokhadavl){
+                        mokhadavl.remove(mymap);
+                        mokhadavl = 0;
+                    }else{
+                        mokhadavl = source.getLayer("geonode:mokhada_village_boundary").addTo(mymap);
+                    }
+                    
+                }
+
+                function addPondaLinesLayer(){
+                    console.log('this is pondalines');
+                    if(pondalinelyr){
+                        pondalinelyr.remove(mymap);
+                        pondalinelyr = 0;
+                    }else{
+                        pondalinelyr = source.getLayer("geonode:ponda_goa_polylines").addTo(mymap);
+                    }
+                    
+                }
+
+                function addPondaPolygonsLayer(){
+                    console.log('this is pondapolygon');
+                    if(pondapolygonlyr){
+                        pondapolygonlyr.remove(mymap);
+                        pondapolygonlyr = 0;
+                    }else{
+                        pondapolygonlyr = source.getLayer("geonode:ponda_goa_polygons_1").addTo(mymap);
+                    }
+                    
+                }
+
+                function addPondaPointsLayer(){
+                    console.log('this is pondapoint');
+                    if(pondapointlyr){
+                        pondapointlyr.remove(mymap);
+                        pondapointlyr = 0;
+                    }else{
+                        pondapointlyr = source.getLayer("geonode:ponda_goa_points").addTo(mymap);
+                    }
+                    
+                }
+
+                function addBuildingLayer(){
+                    console.log('this is building');
+                    if(building){
+                        building.remove(mymap);
+                        building = 0;
+                    }else{
+                        building = source.getLayer("geonode:buildings_in_hwest").addTo(mymap);
+                    }
+                    
+                }
+
+                function addCorporatorLayer(){
+                    console.log('this is corporatorwise ');
+                    if(corporatorwise){
+                        corporatorwise.remove(mymap);
+                        corporatorwise = 0;
+                    }else{
+                        corporatorwise = L.geoJSON.ajax('data/corporator_boundries.geojson', {
+                         //pointToLayer: returnCompMarker, filter:filterComp
+                         // filter: function(feature, layer) {   
+                         //     return (feature.properties.society_name === "Amber");
+                         //   }
+                      }).addTo(mymap);
+                    }
+                    
+                }
+                function addCorporatorSegLayer(){
+                    console.log('this is corporator Segeregation');
+                    if(compseg){
+                        compseg.remove(mymap);
+                        compseg = 0;
+                    }else{
+                        compseg = L.geoJSON.ajax('data/corporator_boundries.geojson', {
+                         pointToLayer: returnCorpsegMarker
+                         // filter: function(feature, layer) {   
+                         //     return (feature.properties.society_name === "Amber");
+                         //   }
+                      }).addTo(mymap);
+                    }
+                    
+                }
+
+                function addBuildsegLayer(){
+                    console.log('this is fulcrum data ');
+                    if(buildseg){
+                        buildseg.remove(mymap);
+                        buildseg = 0;
+                    }else{
+                       buildseg = L.geoJSON.ajax('data/swm_hwest/swm_hwest.geojson', {
+                         pointToLayer: returnEagleMarker, filter:filterEagle
+                         // filter: function(feature, layer) {   
+                         //     return (feature.properties.society_name === "Amber");
+                         //   }
+                      }).addTo(mymap);
+
+                    }
+                    
+                }
+
+                function addBuildcompLayer(){
+                    console.log('this is fulcrum data ');
+                    if(buildcomp){
+                        buildcomp.remove(mymap);
+                        buildcomp = 0;
+                    }else{
+                       buildcomp = L.geoJSON.ajax('data/swm_hwest/swm_hwest.geojson', {
+                         pointToLayer: returnCompMarker, filter:filterComp
+                         // filter: function(feature, layer) {   
+                         //     return (feature.properties.society_name === "Amber");
+                         //   }
+                      }).addTo(mymap);
+
+                    }
+                    
+                }
+
+                function addBuildweightLayer(){
+                    console.log('this is fulcrum data ');
+                    if(buildweight){
+                        buildweight.remove(mymap);
+                        buildweight = 0;
+                    }else{
+                       buildweight = L.geoJSON.ajax('data/swm_hwest/swm_hwest.geojson', {
+                         pointToLayer: returnWeightMarker
+                         // filter: function(feature, layer) {   
+                         //     return (feature.properties.society_name === "Amber");
+                         //   }
+                      }).addTo(mymap);
+
+                    }
+                    
+                }
+
+                function polystyle(feature) {
+        return {
+            fillColor: 'red',
+            weight: 2,
+            opacity: 1,
+            color: 'white',  //Outline color
+            fillOpacity: 0.7
+        };
+    }
+
+                function addPuneBuild(){
+                    console.log('this is pune building data ');
+                    if(punebuild){
+                        punebuild.remove(mymap);
+                        punebuild = 0;
+                    }else{
+                       punebuild = L.geoJSON.ajax('data/pune_buildings_new.geojson', {
+                         style: polystyle,
+
+                        onEachFeature: function (feature, layer) {
+                            layer.bindPopup('Building Name: '+feature.properties.bldg_name+ "<br />No. of Buildings: "+feature.properties.flats+"<br/>No. of Rowhouses: "+feature.properties.rowhouses+"<br/>Levels of Segregation: "+feature.properties.level_seg+"(Dry/Wet)<br/><b>Are there any locations inside the society for disposing other types of waste</b><br/>Ewaste: "+feature.properties.ewaste+"<br/>Glass: "+feature.properties.glass+"<br/>Plastic: "+feature.properties.plastic+"<br/>Sanitary Waste: "+feature.properties.sanitary+"<br/>Coconut Waste: "+feature.properties.coconut+"<br/>In-house Composting: "+feature.properties.composting+"<br/>N P K H Values: "+feature.properties.n_p_k_h+"<br/>Approx Trees in Society: "+feature.properties.trees+"<br/>No of Gardens / Play / Open Spaces in Society: "+feature.properties.open_space+"<br/>Is Compost Available for Sale: "+feature.properties.comp_sale+"<br/>Bird Conservation: "+feature.properties.b_consrv+"<br/>Tree Conservation: "+feature.properties.t_consrv+"<br/>STP Plant: "+feature.properties.stp_plant);
+                          }
+                         // pointToLayer: returnPuneBuildMarker
+                         // filter: function(feature, layer) {   
+                         //     return (feature.properties.society_name === "Amber");
+                         //   }
+                      }).addTo(mymap);
+
+                    }
+                    
+                }
+
+                function addVoterList(){
+                    console.log('this is voter list data ');
+                    if(punebuild){
+                        punebuild.remove(mymap);
+                        punebuild = 0;
+                    }else{
+                       punebuild = L.geoJSON.ajax('voter_list/mulund_geo.geojson', {
+                         //style: polystyle,
+
+                        onEachFeature: function (feature, layer) {
+                            layer.bindPopup('Building Name: प्रभागाचा परिसर : <br/>यादी भाग क्र.२ ६ १ : १ … पुष्पलोक ड्रीमलेंड, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : १० … स्नेहा ड्रीमलेंड, गुरु गोविंद सिंगमार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : १ १ … पुष्पा कुटीर, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : १२ … कृष्णा निवास, गुरुगोविंद सिंग मानी मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : १३ … विक्रम, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : १४ … अशियाना,गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, यादी भाग क्र की ६ १ : १ ५ … गणेश बाग, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, यादी भाग क्र की ६ १ : १६ …रवीकुंजन, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : १७ … यशीधन, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ :१ ८ … अमर निवास, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : १९ … छोकरा निवास, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, यादीभाग क्र की ६ १ : २ … ड्रीमलेंड, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : २० … आशिर्वाद, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम,<br/>यादी भाग क्र.२ ६ १ : २१ … सिंग निवास, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, यादी भाग क्र की ६ १ : २२ … पितृछाया, गुरु गोविंद सिंग मार्ग, मुलुडपश्चिम, यादी भाग क्र की ६ १ : २३ … मातृछाया ड्रीमलेंड, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : २४ … केंद्रीय कर्मचारीसोसायटी ड्रीमलेंडच्या बाजुला, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, यादी भाग क्र की ६ १ : २५ … हायलेंड पली, गुरु गोविंद सिंग मार्ग, मुलुडपश्चिम, यादी भाग क्र की ६ १ : २६ … बी… १ हायलेंड अपार्टमेंट, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, यादी भाग क्र की ६ १ : २७ … सी… १ हायलेंडअपार्टमेंट, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : २८ … रचना गार्डन डेंफोडील सोसायटी, गुरु गोविंद सिंग मार्ग, मुलुडपश्चिम, यादी भाग क्र की ६ १ : २९ … अमरनगर मुलुड कॉलनी, गुरु गोविंद सिंग मार्ग, मुलुड पश्चिम, यादी भाग क्र की ६ १ : में … अंबे निवास, गुरुगोविंद सिंग मानी मुलुड पश्चिम, <br/>यादी भाग क्र.२ ६ १ : ३० … एफ हायलेंड पाती, दर्गा रोड, मुलुड पश्चिम, यादी भाग क्र की ६ १ : में १ … सी… १');
+                          }
+                         // pointToLayer: returnPuneBuildMarker
+                         // filter: function(feature, layer) {   
+                         //     return (feature.properties.society_name === "Amber");
+                         //   }
+                      }).addTo(mymap);
+
+                    }
+                    
+                }
+
+                function addPuneRoad(){
+                    console.log('this is fulcrum data ');
+                    if(puneroad){
+                        puneroad.remove(mymap);
+                        puneroad = 0;
+                    }else{
+                       puneroad = L.geoJSON.ajax('data/pune_roads_geo.geojson', {
+                         pointToLayer: returnPuneRoadMarker
+                         // filter: function(feature, layer) {   
+                         //     return (feature.properties.society_name === "Amber");
+                         //   }
+                      }).addTo(mymap);
+
+                    }
+                    
+                }
+                function addPunePhotos(){
+                    console.log('this is pune photos ');
+                    if(punephotos){
+                        punephotos.remove(mymap);
+                        punephotos = 0;
+                    }else{
+                       punephotos = L.geoJSON.ajax('data/latest_pune_photos.geojson', {
+                         pointToLayer: returnPunePhotosMarker
+                         // filter: function(feature, layer) {   
+                         //     return (feature.properties.society_name === "Amber");
+                         //   }
+                      }).addTo(mymap);
+
+                    }
+                    
+                }
+                
+
+                function addRoadLayer(){
+                    console.log('Road');
+                    if(roads){
+                        roads.remove(mymap);
+                        roads =0;
+                    }else{
+                        roads = source.getLayer("geonode:road_in_grid").addTo(mymap);
+                    }
+                   
+                    
+                }
+
+                function addPrimaryLayer(){
+                    console.log('primary layer');
+                    if(primarys){
+                        primarys.remove(mymap);
+                        primarys =0;
+                    }else{
+                        primarys = source.getLayer("geonode:school_may310").addTo(mymap);
+                    }  
+                }
+
+                function addDistrictLayer(){
+                    console.log('District layer');
+                    mymap.setZoom(7);
+                    if(districtL){
+                        districtL.remove(mymap);
+                        districtL =0;
+                    }else{
+                        districtL = source.getLayer("geonode:district_boundaries_of_maharashtra").addTo(mymap);
+                    }  
+                }
+
+                function addWardLayer(){
+                    console.log('Ward layer');
+                    mymap.setZoom(10);
+                    if(wardl){
+                        wardl.remove(mymap);
+                        wardl =0;
+                    }else{
+                        wardl = source.getLayer("geonode:mumbai_ward_boundary").addTo(mymap);
+                    }  
+                }
+                
+
+                function addVillageLayer(){
+                    console.log('Village layer');
+                    mymap.setZoom(7);
+                    if(villagel){
+                        villagel.remove(mymap);
+                        villagel =0;
+                    }else{
+                        villagel = source.getLayer("geonode:village_2700").addTo(mymap);
+                    }  
+                }
+
+                
+                function addHLPCALayer(){
+                    console.log('HLPCA layer');
+                    mymap.setZoom(7);
+                    if(hlpcal){
+                        hlpcal.remove(mymap);
+                        hlpcal =0;
+                    }else{
+                        hlpcal = source.getLayer("geonode:hlpca").addTo(mymap);
+                    }  
+                }
+
+                function addTown2700Layer(){
+                    console.log('Town 2700 layer');
+                    mymap.setZoom(7);
+                    if(townl){
+                        townl.remove(mymap);
+                        townl =0;
+                    }else{
+                        townl = source.getLayer("geonode:town_2700").addTo(mymap);
+                    }  
+                }
+
+                function addBFHVLLayer(){
+                    console.log('BFHVL layer');
+                    if(bfhvll){
+                        bfhvll.remove(mymap);
+                        bfhvll =0;
+                    }else{
+                        bfhvll = source.getLayer("geonode:s_ward_buffer_for_high_voltage_line_2").addTo(mymap);
+                    }  
+                }
+
+                function addBFRLayer(){
+                    console.log('BFR layer');
+                    if(bfrl){
+                        bfrl.remove(mymap);
+                        bfrl =0;
+                    }else{
+                        bfrl = source.getLayer("geonode:s_ward_bufferforrailway").addTo(mymap);
+                    }  
+                }
+
+                function addHVLLayer(){
+                    console.log('HVL layer');
+                    if(hvll){
+                        hvll.remove(mymap);
+                        hvll =0;
+                    }else{
+                        hvll = source.getLayer("geonode:s_ward_high_voltage_line").addTo(mymap);
+                    }  
+                }
+
+                function addMRLLayer(){
+                    console.log('MRLlayer');
+                    if(mrll){
+                        mrll.remove(mymap);
+                        mrll =0;
+                    }else{
+                        mrll = source.getLayer("geonode:s_ward_metrorailline1_station").addTo(mymap);
+                    }  
+                }
+
+                function addOSMBLayer(){
+                    console.log('OSMB layer');
+                    if(osmbl){
+                        osmbl.remove(mymap);
+                        osmbl =0;
+                    }else{
+                        osmbl = source.getLayer("geonode:osm_building_s_ward").addTo(mymap);
+                    }  
+                }
+
+                function addPolyLayer(){
+                    console.log('Polygon layer');
+                    if(polyl){
+                        polyl.remove(mymap);
+                        polyl =0;
+                    }else{
+                        polyl = source.getLayer("geonode:s_ward_all_polygone").addTo(mymap);
+                    }  
+                }
+
+                function addPondLayer(){
+                    console.log('Pond layer');
+                    if(pondl){
+                        pondl.remove(mymap);
+                        pondl =0;
+                    }else{
+                        pondl = source.getLayer("geonode:s_ward_pond").addTo(mymap);
+                    }  
+                }
+
+                function addRailLayer(){
+                    console.log('rail layer');
+                    if(raill){
+                        raill.remove(mymap);
+                        raill =0;
+                    }else{
+                        raill = source.getLayer("geonode:s_ward_railwaytrack_station").addTo(mymap);
+                    }  
+                }
+
+                
+                function addLWardBuildingLayer(){
+                    console.log('l ward building');
+                    if(lwardbl){
+                        lwardbl.remove(mymap);
+                        lwardbl =0;
+                    }else{
+                        lwardbl = source.getLayer("geonode:l_ward_osm_building").addTo(mymap);
+                    }  
+                }
+
+                function addPadsBoundaryLayer(){
+                    console.log('pads boundary building');
+                    if(pbl){
+                        pbl.remove(mymap);
+                        pbl =0;
+                    }else{
+                        pbl = source.getLayer("geonode:pads_bondry").addTo(mymap);
+                    }  
+                }
+
+                function addPadsBuildingLayer(){
+                    console.log('pads building');
+                    if(pbul){
+                        pbul.remove(mymap);
+                        pbul =0;
+                    }else{
+                        pbul = source.getLayer("geonode:pads_all_buildingfootprint").addTo(mymap);
+                    }  
+                }
+
+                function addPadsGardenLayer(){
+                    console.log('pads garden');
+                    if(pgl){
+                        pgl.remove(mymap);
+                        pgl =0;
+                    }else{
+                        pgl = source.getLayer("geonode:pads_garden").addTo(mymap);
+                    }  
+                }
+
+                function addPadsStreetLayer(){
+                    console.log('pads street');
+                    if(psl){
+                        psl.remove(mymap);
+                        psl =0;
+                    }else{
+                        psl = source.getLayer("geonode:pads_street").addTo(mymap);
+                    }  
+                }
+
+                function addPondaHospitalLayer(){
+                    console.log('ponda hospital');
+                    if(pondahl){
+                        pondahl.remove(mymap);
+                        pondahl =0;
+                    }else{
+                        pondahl = source.getLayer("geonode:ponda_pt_hospital").addTo(mymap);
+                    }  
+                }
+
+                function addPondaSchoolLayer(){
+                    console.log('ponda school');
+                    if(pondasl){
+                        pondasl.remove(mymap);
+                        pondasl =0;
+                    }else{
+                        pondasl = source.getLayer("geonode:ponda_pt_school").addTo(mymap);
+                    }  
+                }
+
+                function addPondaWorshipLayer(){
+                    console.log('ponda worship');
+                    if(pondawl){
+                        pondawl.remove(mymap);
+                        pondawl =0;
+                    }else{
+                        pondawl = source.getLayer("geonode:ponda_pt_worship").addTo(mymap);
+                    }  
+                }
+
+                function addPondaFoodLayer(){
+                    console.log('ponda food');
+                    if(pondafl){
+                        pondafl.remove(mymap);
+                        pondafl =0;
+                    }else{
+                        pondafl = source.getLayer("geonode:ponda_pt_food_1").addTo(mymap);
+                    }  
+                }
+
+                function addPondaOtherLayer(){
+                    console.log('ponda other');
+                    if(pondaol){
+                        pondaol.remove(mymap);
+                        pondaol =0;
+                    }else{
+                        pondaol = source.getLayer("geonode:ponda_pt_others").addTo(mymap);
+                    }  
+                }
+
+                //filter functions
+
+                function returnEagleMarker(json, latlng){
+                    var att = json.properties;
+                    if (att.is_the_segregation_at_source_adequate=='Yes') {
+                        var clrNest = 'chartreuse';
+                    } else {
+                        var clrNest = 'deeppink';
+                    }
+                    // arEagleIDs.push(att.nest_id.toString());
+                    return L.circle(latlng, {radius:10, color:clrNest}).bindTooltip("<img width=100 height=100 src='data/swm_hwest/"+att.society_photo+".jpg'/><h4>Society Name: "+att.society_name+"</h4>Segeregation at source: "+att.is_the_segregation_at_source_adequate);
+                }
+
+                function filterEagle(json) {
+                    var att=json.properties;
+                    var optFilter = $("input[name=fltEagle]:checked").val();
+                    if (optFilter=='ALL') {
+                        return true;
+                    } else {
+                        return (att.is_the_segregation_at_source_adequate==optFilter);
+                    }
+                }
+
+                $("input[name=fltEagle]").click(function(){
+                    //arEagleIDs=[];
+                    buildseg.refresh();
+                });
+
+                function returnCompMarker(json, latlng){
+                    var att = json.properties;
+                    if (att.do_you_have_any_in_house_composting_facility=='Yes') {
+                        var clrNest = 'chartreuse';
+                    } else {
+                        var clrNest = 'deeppink';
+                    }
+                    // arEagleIDs.push(att.nest_id.toString());
+                    return L.circle(latlng, {radius:10, color:clrNest}).bindTooltip("<img width=100 height=100 src='data/swm_hwest/"+att.society_photo+".jpg'/><h4>Society Name: "+att.society_name+"</h4>Composting at source: "+att.do_you_have_any_in_house_composting_facility);
+                }
+
+                function filterComp(json) {
+                    var att=json.properties;
+                    var optFilter = $("input[name=optbcomp]:checked").val();
+                    if (optFilter=='ALL') {
+                        return true;
+                    } else {
+                        return (att.do_you_have_any_in_house_composting_facility==optFilter);
+                    }
+                }
+
+                $("input[name=optbcomp]").click(function(){
+                    //arEagleIDs=[];
+                    buildcomp.refresh();
+                });
+
+                function returnWeightMarker(json, latlng){
+                    var att = json.properties;
+                    // if (att.do_you_have_any_in_house_composting_facility=='Yes') {
+                    //     var clrNest = 'chartreuse';
+                    // } else {
+                    //     var clrNest = 'deeppink';
+                    // }
+                    // arEagleIDs.push(att.nest_id.toString());
+                    var new_popu = att.flats * 2;
+                    var new_weight = att.weight/new_popu;
+                    return L.circle(latlng, {radius:10, color:"chartreuse"}).bindPopup("<img width=100 height=100 src='data/swm_hwest/"+att.society_photo+".jpg'/><h4>Society Name: "+att.society_name+"</h4>Weight: "+new_weight);
+                }
+
+                function returnCorpsegMarker(json, latlng){
+                    var att = json.properties;
+                    var att1 =  L.geoJSON.ajax('data/swm_hwest/swm_hwest.geojson');
+                    if (turf.pointsWithinPolygon(att1, att)) {
+                        var clrNest = 'chartreuse';
+                    } else {
+                        var clrNest = 'deeppink';
+                    }
+                    // arEagleIDs.push(att.nest_id.toString());
+                    // return L.circle(latlng, {radius:10, color:clrNest}).bindTooltip("<img width=100 height=100 src='data/swm_hwest/"+att.society_photo+".jpg'/><h4>Society Name: "+att.society_name+"</h4>Composting at source: "+att.do_you_have_any_in_house_composting_facility);
+                    return L.circle(latlng, {radius:10, color:clrNest});
+                }
+
+                function returnPuneBuildMarker(json, latlng){
+                    var att = json.properties;
+                    // if (att.do_you_have_any_in_house_composting_facility=='Yes') {
+                    //     var clrNest = 'chartreuse';
+                    // } else {
+                    //     var clrNest = 'deeppink';
+                    // }
+                    // arEagleIDs.push(att.nest_id.toString());
+                    // var new_popu = att.flats * 2;
+                    // var new_weight = att.weight/new_popu;
+                    return L.circle(latlng, {radius:10, color:"chartreuse"}).bindTooltip("OSM id: "+att.name);
+                }
+
+                function returnPuneRoadMarker(json, latlng){
+                    var att = json.properties;
+                    // if (att.do_you_have_any_in_house_composting_facility=='Yes') {
+                    //     var clrNest = 'chartreuse';
+                    // } else {
+                    //     var clrNest = 'deeppink';
+                    // }
+                    // arEagleIDs.push(att.nest_id.toString());
+                    // var new_popu = att.flats * 2;
+                    // var new_weight = att.weight/new_popu;
+                    return L.circle(latlng, {radius:10, color:"chartreuse"}).bindTooltip();
+                }
+            function returnPunePhotosMarker(json, latlng){
+                    var att = json.properties;
+                    // if (att.do_you_have_any_in_house_composting_facility=='Yes') {
+                    //     var clrNest = 'chartreuse';
+                    // } else {
+                    //     var clrNest = 'deeppink';
+                    // }
+                    // arEagleIDs.push(att.nest_id.toString());
+                    // var new_popu = att.flats * 2;
+                    // var new_weight = att.weight/new_popu;
+                    return L.circle(latlng, {radius:10, color:"chartreuse"}).bindPopup("<img width=100 height=100 src='data"+att.Path+"'/>");
+                }
+
+    </script>
+
+
+
+ {% endif%}
+
+    {% endblock %}

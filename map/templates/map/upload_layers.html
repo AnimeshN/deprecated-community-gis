@@ -1,0 +1,22 @@
+{% extends 'map/base.html' %}
+
+{% block content %}
+
+<style>
+.full-screen {
+  
+
+height: 120vh;
+width: 80vh;
+}
+
+}
+</style>
+<div class="container .col-sm- full-screen">
+	<h2 class="text-center">Upload Layers</h2>
+	<form method='post' enctype='multipart/form-data'>
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type='submit' class='btn btn-primary'>Upload Layers</button>
+</div>
+{% endblock%}

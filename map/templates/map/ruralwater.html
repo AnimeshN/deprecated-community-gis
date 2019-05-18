@@ -1,0 +1,98 @@
+{% extends 'map/base.html' %}
+{% load static%}
+{% block content %}
+{% if user.is_authenticated %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<style>
+    
+.select {
+    background:rgb(255,255,255);
+}
+.select.highlight {
+    background:rgb(26, 255, 0);
+}
+</style>
+
+<div id="side-bar" style="background-color: rgba(0, 0, 0, 0.2);">                <!-- Main container -->
+
+  <h2>Rural Water Maps</h2>
+  <hr>
+ 
+<ul class="list-group">
+    <li class="list-group-item list-group-item-info"><b>Ratnagiri</b></li>
+    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:d_palghar')";>Palgarh</button></li>
+ </ul> 
+
+</div>
+
+
+    <script>
+     var myLayerList = [];
+    function putLayer(geonode_source){
+        mymap.setView([19.6936, 72.7655], 9);
+        var index = myLayerList.indexOf(geonode_source);
+        if(index >= 0){
+            console.log('remove'+geonode_source)
+            source.getLayer(geonode_source).addTo(mymap).remove(mymap);
+            myLayerList.splice(index,1);
+
+        }else{
+            console.log('add'+geonode_source);
+            // info.toFront(geonode_);
+            source.getLayer(geonode_source).addTo(mymap);
+            myLayerList.push(geonode_source);
+        }
+    }
+
+    $('.select').click(function () {
+        $(this).toggleClass('highlight')
+    })
+
+
+    </script>
+
+<div id="mapdiv" class="col-md-12"></div>
+<script>
+var mymap;
+            
+            var source = L.wms.source(
+                "http://13.82.229.27/geoserver/wfs",
+                {
+                    "format": "image/png",
+                    "transparent": "true"
+                }        
+                );
+            
+        
+                mymap = L.map('mapdiv', {center:[19.0760, 72.8777], zoom:13, zoomControl:false, attributionControl:false});
+                lyrOSM = L.tileLayer.provider('OpenStreetMap.Mapnik');
+                lyrImagery = L.tileLayer.provider('Esri.WorldImagery');
+                mymap.addLayer(lyrOSM);
+                
+                
+                objBasemaps = {
+                    "Open Street Maps": lyrOSM,
+                    "Imagery":lyrImagery
+                };
+                
+                objOverlays = {
+                };
+                
+                var ctlLayers = L.control.layers(objBasemaps, objOverlays).addTo(mymap);
+                var ctlSidebar = L.control.sidebar('side-bar').addTo(mymap);
+
+                var ctlEasybutton = L.easyButton('glyphicon-transfer', function(){
+                   ctlSidebar.toggle(); 
+                }).addTo(mymap);
+
+                var ctlPan = L.control.pan().addTo(mymap);
+                var ctlZoomslider = L.control.zoomslider({position:'topright'}).addTo(mymap);
+                
+                var ctlSidebar = L.control.sidebar('side-bar').addTo(mymap);
+                
+               
+</script>
+
+{% endif %}
+
+{% endblock %}

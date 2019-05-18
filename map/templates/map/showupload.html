@@ -1,0 +1,68 @@
+{% extends 'map/base.html' %}
+{% load static%}
+{% block content %}
+{% if user.is_authenticated %}
+
+<style>
+.mystyles{
+	
+  width: 320px;
+  padding: 1px;
+ 
+  margin: 0 auto; 
+  word-wrap: break-word;
+  align-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 50px;
+  background-color: aliceblue;
+
+  padding: 20px;
+  /* font-size: 30px; */
+  text-align: center;
+}
+
+.alignit{
+
+	display: grid;
+        gap: 10px 10px;
+        grid-template-columns: repeat(2, 1fr);
+        /* grid-template-rows: repeat(3, 70vh); */
+        place-items: center center; 
+
+}
+
+
+
+
+
+
+
+</style>
+<div class="text-center">
+		<h2>Your Layers</h2>
+<hr>
+</div>
+
+	
+	<div class="alignit ">
+		{% for lyr in layers %}
+		<div class="mystyles center	" id='title'>
+			<b>Name:</b>{{ lyr.name_of_layer}}<br>
+			<hr>
+			<b>Description</b><br>{{ lyr.description}}<br>
+			<hr>
+			<b>Uploaded on:</b><small>{{ lyr.created }}</small><br>
+			<hr>
+			<!-- <button class ="btn btn-dark">Download</button> -->
+			<a href = '{{ lyr.layer.url }}' class = 'btn btn-light' style="float:left" target='_bland' > Download </a>
+			<form method='post' action="{%url 'delete_upload' lyr.pk %}">
+					{% csrf_token %}
+					<button type='submit' class='btn btn-danger' style="float:right">Delete</button>
+			</form>
+			
+		</div>
+		{% endfor %}
+	</div>
+{% endif %}
+
+{% endblock %}

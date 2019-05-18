@@ -1,0 +1,174 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  
+    <link rel="stylesheet" href="{% static 'footer.css' %}" >
+    <link rel="stylesheet" href="{% static 'leaflet.css' %}" >
+    <link rel="stylesheet" href="{% static 'plugins/L.Control.Pan.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/L.Control.Zoomslider.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/L.Control.MousePosition.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/L.Control.Sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/Leaflet.PolylineMeasure.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/easy-button.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mycss.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'front.css' %}">
+	
+    
+    
+
+    <script src="{% static 'leaflet-src.js' %}" ></script>
+    <!-- <script src="src/jquery-3.2.0.min.js"></script> -->
+    <script src="{% static 'plugins/L.Control.Pan.js' %}" ></script>
+    <script src="{% static 'plugins/L.Control.Zoomslider.js' %}" ></script>
+    <script src="{% static 'plugins/L.Control.MousePosition.js' %}"></script>
+    <script src="{% static 'plugins/L.Control.Sidebar.js' %}"></script>
+    <script src="{% static 'plugins/Leaflet.PolylineMeasure.js' %}"></script>
+    <script src="{% static 'plugins/easy-button.js' %}"></script>
+    <script src="{% static 'plugins/leaflet-providers.js' %}"></script>
+    <script src="{% static 'plugins/leaflet-opencage/src/js/L.Control.OpenCageSearch.js' %}"></script>
+    <!-- <script src="{% static 'app.js' %}"></script> -->
+    <!-- <link rel="stylesheet" type="leaflet.wms.js" href="{% static 'css/component.css' %}"  /> -->
+    <link rel="stylesheet" href="{% static 'mystyle.css' %}">
+    <link rel= 'stylesheet' href="{% static 'css/component.css' %}">
+    <script src="{% static 'plugins/leaflet.ajax.min.js' %}" ></script>
+    <script src="{% static 'js/modernizr-custom.js' %}" ></script>
+    <script src="{% static 'leaflet.wms.js' %}" ></script>
+
+    <script src="{% static 'js/classie.js' %}"></script>
+    <!-- <script src="js/dummydata.js"></script> -->
+    <!-- <script src="src/js/main.js"></script> -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'myscript.js' %}"></script>
+
+    <title>CommunityGIS</title>
+  </head>
+
+  <body>
+  	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" href="{% url 'front'%}">Community GIS</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="{% url 'front'%}">Home <span class="sr-only">(current)</span></a>
+	      </li>
+
+	      
+            {% if user.is_authenticated %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">Dashboard<span class="sr-only">(current)</span></a>
+          </li>
+            {% if user.groups.all.0.name != "restricted"%}
+           <li class="nav-item active ">
+            <a class="nav-link" href="{% url 'changepass' %}">Change Password<span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item active ">
+              <a class="nav-link" href="{% url 'upload_layers' %}">Upload Layer<span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item active ">
+                <a class="nav-link" href="{% url 'show_upload' %}">Show Layer<span class="sr-only">(current)</span></a>
+              </li>
+            {% endif %}
+
+            
+
+          
+            {% if user.groups.all.0.name == 'makerghat'%}
+            <li class="nav-item active ">
+                <a class="nav-link" href="{% url 'show_all_upload' %}">Show all Layer<span class="sr-only">(current)</span></a>
+              </li>
+            {% endif %}
+
+           <li class="nav-item active ">
+            <a class="nav-link" href="{% url 'logoutU' %}">Logout<span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item   ">
+            <a class="nav-link" href="#">Welcome {{ user.first_name }} {{ user.last_name }} !<span class="sr-only">(current)</span></a>
+          </li>
+
+          
+
+          {% else %}
+
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'login' %}">Login<span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'demo' %}">Demo<span class="sr-only">(current)</span></a>
+          </li>
+
+          {% endif %}
+
+
+
+
+	     <!--  <li class="nav-item">
+	        <a class="nav-link" href="#">Link</a>
+	      </li> -->
+	      <!-- <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Dropdown
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <a class="dropdown-item" href="#">Action</a>
+	          <a class="dropdown-item" href="#">Another action</a>
+	          <div class="dropdown-divider"></div>
+	          <a class="dropdown-item" href="#">Something else here</a>
+	        </div>
+	      </li> -->
+	      <!-- <li class="nav-item">
+	        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+	      </li> -->
+	    </ul>
+	    
+	  </div>
+	</nav>
+
+
+   <div id="page-container">
+   <div id="content-wrap">
+     <!-- all other page content -->
+     {% if messages %}
+      {% for message in messages%}
+       <div class="alert alert-success text-center" role="alert">
+          {{ message }}
+        </div>
+       {% endfor %}
+    {% endif %} 
+    {% block content%}
+    {% endblock %}
+   </div>
+   <footer id="footer" class="text-center" style="background-color: black">
+     
+     <span style="color:white">© 2019 Copyright:</span><a href="https://makerghat.org" style="color: white"> makerGHAT.com</a>
+   </footer>
+ </div>
+
+
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+</script>
+
+  </body>
+</html>

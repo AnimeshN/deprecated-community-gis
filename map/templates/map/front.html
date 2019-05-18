@@ -1,0 +1,42 @@
+{% extends 'map/base.html' %}
+{% load static%}
+{% block content %}
+
+
+<style>
+  
+
+</style>
+<div class="container full">
+  <div id="carouselExampleSlidesOnly" class="row carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="{% static 'images/img1.png' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/img2.png' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/img3.png' %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+</div>
+  <div class="row container" style="width:1000px; margin:0 auto;" >
+    <div class="col-8">
+    	<h1 class="text-center">About Us</h1>
+      <p>CommunityGIS is a platform for community (other than commercial entities or government entities) for a spatial data infrastructure.
+		Primary objective of communitygis is to provide educational platform for learners to learn about spatial information and learn how these  modern tools can be used to solve real life problems. 
+		It creates a platform for people who range from those who can contribute data ( mobile based point data collection to digitization of published maps) to those who can analyse the data to infer useful social knowledge. It is a digital contraption needed to collect, aggregate , access and analyse data  finally provide decision support for to manipulate reality.
+
+		<i>Since all source code is published , under GPL, any one can reproduce the technology , without any permission from makerGHAT. </i>
+
+		<b>This has been created by volunteers and coordinated by www.makerghat.org</b>
+	</p>
+    </div>
+    <div class="col-4">
+      <h1 class="text-center">Caveat</h1><p>All data are collected by volunteers and makerGHAT only provides the technology platform . Errors or omissions in data are not responsibility of makerGHAT. No claims are made for accuracy of the maps data. Users may use the same at THEIR OWN RISK.</p>
+    </div>
+  </div>
+
+{% endblock %}
