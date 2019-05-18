@@ -5,7 +5,7 @@ CommunityGIS is a platform for community (other than commercial entities or gove
 # To run locally, use following guidline
 
 
-:baby: You need python3 and pip3 for installing packages
+:baby: You will need python3 and pip3 for installing packages
 
 :boy:fork the repo
 
