@@ -7,36 +7,36 @@ CommunityGIS is a platform for community (other than commercial entities or gove
 
 :baby: You will need python3 and pip3 for installing packages
 
-:boy:fork the repo
+:boy: fork the repo
 
-:man:clone your repo locally
+:man: clone your repo locally
 
-:older_man:create virtual env
+:older_man: create virtual env
 ```
 pip3 -m venv VIRTUALENVNAME 
 ```
-:skull:Activate virtual env
+:skull: activate virtual env
 ```
 source VIRTUALENVNAME/bin/activate
 ```
-:speak_no_evil:install dependencies
+:speak_no_evil: install dependencies
 ```
 pip3 install -r requirments.txt
 ```
-:see_no_evil:install postgresql
+:see_no_evil: install postgresql
 
 ```
 sudo apt-get install postgresql
 ```
-:hear_no_evil:setup database using postgres-setup.txt
+:hear_no_evil: setup database using postgres-setup.txt
 
-:pray:email at nautiyalanimesh@gmail.com for asking keys for projects
+:pray: email at nautiyalanimesh@gmail.com for asking keys for projects
 
-:clap:create tables
+:clap: create tables
 ```
 python3 manage.py migrate
 ```
-:sunglasses:run at http://127.0.0.1:8000/
+:sunglasses: run at http://127.0.0.1:8000/
 ```
 python3 manage.py runserver
 ```
