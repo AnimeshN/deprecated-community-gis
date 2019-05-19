@@ -22,6 +22,9 @@ from .models import Layers
 def home(request):
 	return render(request,'map/home.html',{})
 
+def dp_2014_34(request):
+    return render(request,'map/dp_2014_34.html',{})
+
 
 def front(request):
 	return render(request,'map/front.html')

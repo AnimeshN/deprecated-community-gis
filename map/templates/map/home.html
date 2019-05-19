@@ -64,6 +64,35 @@
         </div>
         </div>
     {% endif %}
+<!-- Development Planning 2014-34 Start here-->
+    {% if user.groups.all.0.name == "makerghat" or user.groups.all.0.name == "restricted" %}
+
+
+
+    <div class = "container" id="mydiv" style="float:left;">
+
+
+        <img src="{% static 'images/home_thumbnail/dp_polygon.png' %}" width="350" height="263" alt="census">
+        <div style="padding: 10px">
+        <h2 class="text-center">DP 2014-34</h2>
+
+        <div id="demo1" class="collapse">
+            
+        </div>
+        <div class="text-center" style="padding-top: 5px">
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1">View information</button>
+
+        <a href="{% url 'dp_2014_34' %}" class="btn btn-success">Visit</a>
+        </div>
+        </div>
+        </div>
+
+    {% endif %}
+<!-- Development Planning 2014-34 End here-->
+
+
+
+
 
     {% if user.groups.all.0.name == "makerghat" or user.groups.all.0.name == "restricted" %}
 
