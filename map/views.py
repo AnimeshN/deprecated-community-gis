@@ -35,54 +35,14 @@ def login_user(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            if user.groups.filter(name='iit').exists():
-                login(request, user)
-                return redirect('home')
-            elif user.groups.filter(name='makerghat').exists():
-                login(request, user)
-                messages.success(request,('successfully loged in'))
-                return redirect('home')
-            elif user.groups.filter(name='health').exists():
-                login(request, user)
-                messages.success(request,('successfully loged in'))
-                return redirect('home')
-            elif user.groups.filter(name='restricted').exists():
-                login(request, user)
-                messages.success(request,('successfully loged in'))
-                return redirect('home')
-            elif user.groups.filter(name='census').exists():
-                login(request, user)
-                messages.success(request,('successfully loged in'))
-                return redirect('home')
-            elif user.groups.filter(name='transport').exists():
-                login(request, user)
-                messages.success(request,('successfully loged in'))
-                return redirect('home')
-            else:
-                return HttpResponse("no user groups exist")
+            login(request, user)
+            messages.success(request,('Successfully loged in'))
+            return redirect('home')
         else:
             messages.success(request,('Please try again!'))
             return redirect('login')
     else:
         return render(request,'map/login.html',{})
-
-
-
-
-# def signup_user(request):
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             raw_password = form.cleaned_data.get('password1')
-#             user = authenticate(username=username, password=raw_password)
-#             login(request, user)
-#             return redirect('home')
-#     else:
-#         form = UserCreationForm()
-#     return render(request, 'map/signup.html', {'form': form})
-
 
 def signup_user(request):
     if request.method == 'POST':

@@ -45,8 +45,9 @@
   </div>
 {% endif %}
 <div class="space" style="">
-      {% if user.groups.all.0.name == "makerghat" or user.groups.all.0.name == "census" or user.groups.all.0.name == "restricted" %}
-        <div class = "container" id="mydiv" style="float:left;">
+    {% for group in user.groups.all %}
+    {% if group.name == 'census' or group.name == 'restricted' %}
+    <div class = "container" id="mydiv" style="float:left;">
 
 
         <img src="{% static 'images/home_thumbnail/census.png' %}" width="350" height="263" alt="census">
@@ -64,15 +65,20 @@
         </div>
         </div>
     {% endif %}
-<!-- Development Planning 2014-34 Start here-->
-    {% if user.groups.all.0.name == "makerghat" or user.groups.all.0.name == "restricted" %}
+    {% endfor %}
+    
+        
+        
+        <!-- Development Planning 2014-34 Start here-->
+        {% for group in user.groups.all %}
+        {% if group.name ==  'development_plan' or group.name == 'restricted'  %}
 
 
 
     <div class = "container" id="mydiv" style="float:left;">
 
 
-        <img src="{% static 'images/home_thumbnail/dp_polygon.png' %}" width="350" height="263" alt="census">
+        <img src="{% static 'images/home_thumbnail/dp_polygon.png' %}" width="350" height="263" alt="dp">
         <div style="padding: 10px">
         <h2 class="text-center">DP 2014-34</h2>
 
@@ -87,21 +93,23 @@
         </div>
         </div>
 
-    {% endif %}
-<!-- Development Planning 2014-34 End here-->
+        {% endif %}
+        {% endfor %}
+        <!-- Development Planning 2014-34 End here-->
 
 
 
 
 
-    {% if user.groups.all.0.name == "makerghat" or user.groups.all.0.name == "restricted" %}
+{% for group in user.groups.all %}
+{% if group.name ==  'swm' or group.name == 'restricted'  %}
 
 
 
     <div class = "container" id="mydiv" style="float:left;">
 
 
-        <img src="{% static 'images/home_thumbnail/swm.png' %}" width="350" height="263" alt="census">
+        <img src="{% static 'images/home_thumbnail/swm.png' %}" width="350" height="263" alt="swm">
         <div style="padding: 10px">
         <h2 class="text-center">SWM Maps</h2>
 
@@ -116,16 +124,19 @@
         </div>
         </div>
 
-    {% endif %}
+        {% endif %}
+        {% endfor %}
 
-    {% if user.groups.all.0.name == "makerghat" or user.groups.all.0.name == "restricted" %}
 
+
+    {% for group in user.groups.all %}
+    {% if group.name  == 'edu' or group.name == 'restricted'  %}
 
 
     <div class = "container" id="mydiv" style="float:left;">
 
 
-        <img src="{% static 'images/home_thumbnail/edu.png' %}" width="350" height="263" alt="census">
+        <img src="{% static 'images/home_thumbnail/edu.png' %}" width="350" height="263" alt="edus">
         <div style="padding: 10px">
         <h2 class="text-center">Education Maps</h2>
 
@@ -143,10 +154,11 @@
         </div>
         </div>
 
-    {% endif %}
-
+        {% endif %}
+        {% endfor %}
   
-     {% if user.groups.all.0.name == "iit" or user.groups.all.0.name == "makerghat" %} 
+    {% for group in user.groups.all %}
+    {% if group.name == 'iit' or group.name == 'restricted'  %}
     
 
 
@@ -167,32 +179,19 @@
         </div>
         </div>
         </div>
-    {% endif %}
+        {% endif %}
+        {% endfor %}
 
-     {% if user.username == "sudhanshuk1710" %} 
+
+    {% for group in user.groups.all %}
+    {% if group.name == 'transport' or group.name == 'restricted'  %}
     
-     <div class = "container" id="mydiv" style="float:left;">
 
-
-     <img src="{% static 'images/home_thumbnail/census.png' %}" width="350" height="263" alt="census">
-     <div style="padding: 10px">
-     <h2 class="text-center">Census Maps</h2>
-
-     <div id="demos" class="collapse">
-         Village wise details of census data, along with ground water recharge priorities is compiled with village boundaries and town boundaries. Census data are for 2011 census and includes 1. Household amenities 2. Village amenities, 3. Demography and 4. Town amenities. A combined towns and villages map, grouped for every district,is also included. This is derived from the data published on IIT site (<a href="https://www.cse.iitb.ac.in/~pocra/MahaCensus_shapefile_data1.2/MaharashtraCensus.html">Click here</a>)Explanations for field names in tables are provided in separate tables.
-     </div>
-     <div class="text-center" style="padding-top: 5px">
-     <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demos">View information</button>
-
-     <a href="{% url 'census'%}" class="btn btn-success">Visit</a>
-     </div>
-     </div>
-     </div>
 
     <div class = "container" id="mydiv" style="float:left;">
 
 
-        <img src="{% static 'images/home_thumbnail/trans.png' %}" width="350" height="263" alt="census">
+        <img src="{% static 'images/home_thumbnail/trans.png' %}" width="350" height="263" alt="transport">
         <div style="padding: 10px">
         <h2 class="text-center">Transportation Maps</h2>
 
@@ -209,12 +208,12 @@
         </div>
         </div>
         </div>
-    {% endif %}
+        {% endif %}
+        {% endfor %}
 
-    {% if user.groups.all.0.name == "makerghat" or user.groups.all.0.name == "health" or user.groups.all.0.name == "restricted" %}
 
-     
-
+    {% for group in user.groups.all %}
+    {% if group.name == 'health' or group.name == 'restricted'  %}
     <div class = "container" id="mydiv" style="float:left;">
 
 
@@ -232,38 +231,18 @@
         </div>
         </div>
         </div>
-    {% endif %}
-{% if user.groups.all.0.name == 'makerghat' %}
-    <div class = "container" id="mydiv" style="float:left;">
+        {% endif %}
+        {% endfor %}
 
 
-        <img src="{% static 'images/home_thumbnail/trans.png' %}" width="350" height="263" alt="census">
-        <div style="padding: 10px">
-        <h2 class="text-center">Transportation Maps</h2>
-
-        <div id="demo7" class="collapse">
-            Bus transportation is a carrier of development and an indicator of human development. The following shapefiles combine census data, bus depot operational data and GIS data of Shahapur taluka. The data tries to show routes that are profitable / lossy , number of bus services passing through any point of importance in taluka etc. This data not only helps in decision support but also holistic access of transportation to the community, thereby fostering development.
-<br><b>Data sets used</b>: <br>
-<u>MRSAC</u>:<i>road network of Thane district<br></i>
-<u>MSRTC</u>:<i>Operational data of Shahapur Taluka, Jan-Mar 2019</i>
-        </div>
-        <div class="text-center" style="padding-top: 5px">
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo7">View information</button>
-
-        <a href="{% url 'transport'%}" class="btn btn-success">Visit</a>
-        </div>
-        </div>
-        </div>
-       {% endif %} 
-
-    {% if user.groups.all.0.name == "makerghat" or user.groups.all.0.name == "restricted" %}
-
+       {% for group in user.groups.all %}
+       {% if group.name == 'water' or group.name == 'restricted'  %}
      
 
     <div class = "container" id="mydiv" style="float:left;">
 
 
-        <img src="{% static 'images/home_thumbnail/ruralwater.png' %}" width="350" height="263" alt="census">
+        <img src="{% static 'images/home_thumbnail/ruralwater.png' %}" width="350" height="263" alt="water">
         <div style="padding: 10px">
         <h2 class="text-center">Rural water Maps</h2>
 
@@ -277,10 +256,8 @@
         </div>
         </div>
         </div>
-    {% endif %}
-
-    {% if user.groups.all.0.name == "makerghat" or user.groups.all.0.name == "iit" or user.groups.all.0.name == 'census' or user.groups.all.0.name == "restricted"%}
-
+        {% endif %}
+        {% endfor %}
 
     <div class = "container" id="mydiv" style="float: left;">
 
@@ -299,8 +276,10 @@
         </div>
         </div>
         </div>
-    {% endif %}
-</div>
+   
+    </div>
+   
+
 
 
 
