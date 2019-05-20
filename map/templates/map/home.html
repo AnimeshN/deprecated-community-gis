@@ -46,7 +46,7 @@
 {% endif %}
 <div class="space" style="">
     {% for group in user.groups.all %}
-    {% if group.name == 'census' or group.name == 'restricted' %}
+    {% if group.name == 'census' or group.name == 'restricted' or group.name == 'admin' %}
     <div class = "container" id="mydiv" style="float:left;">
 
 
@@ -71,7 +71,7 @@
         
         <!-- Development Planning 2014-34 Start here-->
         {% for group in user.groups.all %}
-        {% if group.name ==  'development_plan' or group.name == 'restricted'  %}
+        {% if group.name ==  'development_plan' or group.name == 'restricted' or group.name == 'admin'   %}
 
 
 
@@ -102,7 +102,7 @@
 
 
 {% for group in user.groups.all %}
-{% if group.name ==  'swm' or group.name == 'restricted'  %}
+{% if group.name ==  'swm' or group.name == 'restricted' or group.name == 'admin'   %}
 
 
 
@@ -130,7 +130,7 @@
 
 
     {% for group in user.groups.all %}
-    {% if group.name  == 'edu' or group.name == 'restricted'  %}
+    {% if group.name  == 'edu' or group.name == 'restricted' or group.name == 'admin'   %}
 
 
     <div class = "container" id="mydiv" style="float:left;">
@@ -158,7 +158,7 @@
         {% endfor %}
   
     {% for group in user.groups.all %}
-    {% if group.name == 'iit' or group.name == 'restricted'  %}
+    {% if group.name == 'iit' or group.name == 'restricted' or group.name == 'admin'   %}
     
 
 
@@ -184,7 +184,7 @@
 
 
     {% for group in user.groups.all %}
-    {% if group.name == 'transport' or group.name == 'restricted'  %}
+    {% if group.name == 'transport' or group.name == 'restricted' or group.name == 'admin'   %}
     
 
 
@@ -213,7 +213,7 @@
 
 
     {% for group in user.groups.all %}
-    {% if group.name == 'health' or group.name == 'restricted'  %}
+    {% if group.name == 'health' or group.name == 'restricted' or group.name == 'admin'   %}
     <div class = "container" id="mydiv" style="float:left;">
 
 
@@ -236,7 +236,7 @@
 
 
        {% for group in user.groups.all %}
-       {% if group.name == 'water' or group.name == 'restricted'  %}
+       {% if group.name == 'water' or group.name == 'restricted' or group.name == 'admin'   %}
      
 
     <div class = "container" id="mydiv" style="float:left;">
