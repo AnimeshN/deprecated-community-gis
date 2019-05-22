@@ -11,11 +11,18 @@ CommunityGIS is a platform for community (other than commercial entities or gove
 
 :man: clone your repo locally
 
-:older_man: create virtual env
+:older_man: install postgresql
+
+```
+sudo apt-get install postgresql
+```
+:skull: setup database using [postgres-setup.txt](postgres-setup.txt)
+
+:see_no_evil: create virtual env
 ```
 pip3 -m venv VIRTUALENVNAME 
 ```
-:skull: activate virtual env
+:hear_no_evil: activate virtual env
 ```
 source VIRTUALENVNAME/bin/activate
 ```
@@ -23,21 +30,19 @@ source VIRTUALENVNAME/bin/activate
 ```
 pip3 install -r requirments.txt
 ```
-:see_no_evil: install postgresql
-
-```
-sudo apt-get install postgresql
-```
-:hear_no_evil: setup database using [postgres-setup.txt](postgres-setup.txt)
-
 :pray: email at nautiyalanimesh@gmail.com for asking keys for projects
 
 :clap: create tables
 ```
 python3 manage.py migrate
 ```
-:sunglasses: run at http://127.0.0.1:8000/
+:clown_face:create superuser
+
+```
+python3 manage.py createsuperuser
+```
+
+:tada: run at http://127.0.0.1:8000/
 ```
 python3 manage.py runserver
 ```
-
