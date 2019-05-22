@@ -16,8 +16,6 @@ CommunityGIS is a platform for community (other than commercial entities or gove
 ```
 sudo apt-get install postgresql
 ```
-:skull: setup database using [postgres-setup.txt](postgres-setup.txt)
-
 :see_no_evil: create virtual env
 ```
 pip3 -m venv VIRTUALENVNAME 
@@ -30,6 +28,8 @@ source VIRTUALENVNAME/bin/activate
 ```
 pip3 install -r requirments.txt
 ```
+:skull: setup database using [postgres-setup.txt](postgres-setup.txt)
+
 :pray: email at nautiyalanimesh@gmail.com for asking keys for projects
 
 :clap: create tables
