@@ -11,24 +11,26 @@ CommunityGIS is a platform for community (other than commercial entities or gove
 
 :man: clone your repo locally
 
-:older_man: create virtual env
+:older_man: install postgresql
+
+```
+sudo apt-get install postgresql
+```
+:see_no_evil: create virtual env
 ```
 pip3 -m venv VIRTUALENVNAME 
 ```
-:skull: activate virtual env
+:hear_no_evil: activate virtual env
 ```
 source VIRTUALENVNAME/bin/activate
 ```
 :speak_no_evil: install dependencies
 ```
-pip3 install -r requirments.txt
+python3 install -r requirments.txt
+or
+python3 install django psycopg2 social-auth-app-django
 ```
-:see_no_evil: install postgresql
-
-```
-sudo apt-get install postgresql
-```
-:hear_no_evil: setup database using [postgres-setup.txt](postgres-setup.txt)
+:skull: setup database using [postgres-setup.txt](postgres-setup.txt)
 
 :pray: email at nautiyalanimesh@gmail.com for asking keys for projects
 
@@ -36,8 +38,13 @@ sudo apt-get install postgresql
 ```
 python3 manage.py migrate
 ```
-:sunglasses: run at http://127.0.0.1:8000/
+:clown_face:create superuser
+
+```
+python3 manage.py createsuperuser
+```
+
+:tada: run at http://127.0.0.1:8000/
 ```
 python3 manage.py runserver
 ```
-
