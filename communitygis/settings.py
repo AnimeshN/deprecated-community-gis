@@ -41,6 +41,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'map',
     'social_django',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+
+    'modelcluster',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +65,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'communitygis.urls'
@@ -157,3 +173,5 @@ LOGIN_REDIRECT_URL = 'front'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
+
+WAGTAIL_SITE_NAME = 'makerghat.urbansciences.in'
