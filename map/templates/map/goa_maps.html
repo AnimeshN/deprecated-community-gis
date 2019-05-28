@@ -79,10 +79,10 @@
         </div>
     <button class="collapsible">Ponda</button>
         <div class="content">
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ponda_goa_points')";>Points</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ponda_goa_points',[15.3991, 74.0124],14)";>Points</button></li>
 
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ponda_goa_polylines')";>DP Polyline</button></li>
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ponda_goa_polygons_1')";>Polygone</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ponda_goa_polylines',[15.3991, 74.0124],14)";>DP Polyline</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ponda_goa_polygons_1',[15.3991, 74.0124],14)";>Polygone</button></li>
             
         </div>
     <button class="collapsible">Watershed</button>
@@ -100,8 +100,10 @@
 
     <script>
      var myLayerList = [];
-    function putLayer(geonode_source){
-        mymap.setView([15.2993, 74.1240], 10);
+    
+    function putLayer(geonode_source,latlong=[15.2993, 74.1240],zoom=10){
+
+        mymap.setView(latlong, zoom);
         var index = myLayerList.indexOf(geonode_source);
         if(index >= 0){
             console.log('remove'+geonode_source)
@@ -150,7 +152,7 @@ var mymap;
                 );
             
         
-                mymap = L.map('mapdiv', {center:[19.1056518,72.7815566], zoom:11.75, zoomControl:false, attributionControl:false});
+                mymap = L.map('mapdiv', {center:[15.2993, 74.1240], zoom:11.75, zoomControl:false, attributionControl:false});
                 lyrOSM = L.tileLayer.provider('OpenStreetMap.Mapnik');
                 lyrImagery = L.tileLayer.provider('Esri.WorldImagery');
                 mymap.addLayer(lyrOSM);
