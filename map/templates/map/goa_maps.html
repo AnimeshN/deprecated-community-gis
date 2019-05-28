@@ -1,0 +1,188 @@
+{% extends 'map/base.html' %}
+{% load static%}
+{% block content %}
+{% if user.is_authenticated %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<style>
+    
+.select {
+    background:rgb(255,255,255);
+}
+.select.highlight {
+    background:rgb(26, 255, 0);
+}
+
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #000;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+
+</style>
+
+<div id="side-bar" style="background-color: rgba(0, 0, 0, 0.2);">                <!-- Main container -->
+
+  <h2>Goa Maps</h2>
+  <hr>
+ 
+<ul class="list-group">
+        <button class="collapsible" onclick="putLayer('geonode:goa_hlpca')">HLPCA</button>
+        <div class="content">
+            <!-- <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:mumbai_sub_census')";>Suburban</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:mumbai_city_census')";>City</button></li> -->
+        </div>
+        <button class="collapsible" onclick="putLayer('geonode:goa_town')">Towns</button>
+        <div class="content">
+                <!--li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:constituency_ward_boundary')";>Update in Progress....</button></li-->
+        </div>
+
+        <button class="collapsible" >Villages</button>
+        <div class="content">
+        <button class="collapsible" >North Goa</button>
+            <div class = 'content'>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_bardez')";>Bardez</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_bicholim')";>Bicholim</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_pernem')";>Pernem</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_satari')";>Satari</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_tiswadi')";>Tiswadi</button></li>
+            </div>
+        <button class="collapsible" >South Goa</button>
+                <div class = 'content'>
+                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_canacona_1')";>Canacona</button></li>
+                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_dharbandora')";>Dharbandora</button></li>
+                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_mormugao')";>Mormugao</button></li>
+                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_ponda')";>Ponda</button></li>
+                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_quepem')";>Quepem</button></li>
+                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_salcete')";>Salcete</button></li>
+                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:goa_v_sanguem')";>Sanguem</button></li>
+                </div>
+
+        </div>
+    <button class="collapsible">Ponda</button>
+        <div class="content">
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ponda_goa_points',[15.3991, 74.0124],14)";>Points</button></li>
+
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ponda_goa_polylines',[15.3991, 74.0124],14)";>DP Polyline</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ponda_goa_polygons_1',[15.3991, 74.0124],14)";>Polygone</button></li>
+            
+        </div>
+    <button class="collapsible">Watershed</button>
+        <div class="content">
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:opa_watershed')";>OPA</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ganjem_watershed')";>Ganjem</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:opa_ganje_watershed')";>OPA+Ganjem</button></li>
+            
+        </div>
+    <!--HWest-ward start here-->
+    
+</ul> 
+    </div>
+
+
+    <script>
+     var myLayerList = [];
+    
+    function putLayer(geonode_source,latlong=[15.2993, 74.1240],zoom=10){
+
+        mymap.setView(latlong, zoom);
+        var index = myLayerList.indexOf(geonode_source);
+        if(index >= 0){
+            console.log('remove'+geonode_source)
+            source.getLayer(geonode_source).addTo(mymap).remove(mymap);
+            myLayerList.splice(index,1);
+
+        }else{
+            console.log('add'+geonode_source);
+            // info.toFront(geonode_);
+            source.getLayer(geonode_source).addTo(mymap);
+            myLayerList.push(geonode_source);
+        }
+    }
+
+    $('.select').click(function () {
+        $(this).toggleClass('highlight')
+    })
+
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+    </script>
+
+<div id="mapdiv" class="col-md-12"></div>
+<script>
+var mymap;
+            
+            var source = L.wms.source(
+                "http://13.82.229.27/geoserver/wfs",
+                {
+                    "format": "image/png",
+                    "transparent": "true"
+                }        
+                );
+            
+        
+                mymap = L.map('mapdiv', {center:[15.2993, 74.1240], zoom:11.75, zoomControl:false, attributionControl:false});
+                lyrOSM = L.tileLayer.provider('OpenStreetMap.Mapnik');
+                lyrImagery = L.tileLayer.provider('Esri.WorldImagery');
+                mymap.addLayer(lyrOSM);
+                
+                
+                objBasemaps = {
+                    "Open Street Maps": lyrOSM,
+                    "Imagery":lyrImagery
+                };
+                
+                objOverlays = {
+                };
+                
+                var ctlLayers = L.control.layers(objBasemaps, objOverlays).addTo(mymap);
+                
+
+               
+                var ctlPan = L.control.pan().addTo(mymap);
+                var ctlZoomslider = L.control.zoomslider({position:'topright'}).addTo(mymap);
+                
+                var ctlSidebar = L.control.sidebar('side-bar').addTo(mymap);
+                var ctlSidebar = L.control.sidebar('side-bar').addTo(mymap);
+                 var ctlEasybutton = L.easyButton('glyphicon-transfer', function(){
+                   ctlSidebar.toggle(); 
+                }).addTo(mymap);
+
+                
+               
+</script>
+
+{% endif %}
+
+{% endblock %}

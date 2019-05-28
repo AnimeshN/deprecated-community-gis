@@ -52,7 +52,7 @@
 
         <img src="{% static 'images/home_thumbnail/census.png' %}" width="350" height="263" alt="census">
         <div style="padding: 10px">
-        <h2 class="text-center">Census Maps</h2>
+        <h2 class="text-center">Maharashtra census maps</h2>
 
         <div id="demos" class="collapse">
             Village wise details of census data, along with ground water recharge priorities is compiled with village boundaries and town boundaries. Census data are for 2011 census and includes 1. Household amenities 2. Village amenities, 3. Demography and 4. Town amenities. A combined towns and villages map, grouped for every district,is also included. This is derived from the data published on IIT site (<a href="https://www.cse.iitb.ac.in/~pocra/MahaCensus_shapefile_data1.2/MaharashtraCensus.html">Click here</a>)Explanations for field names in tables are provided in separate tables.
@@ -81,7 +81,7 @@
 
         <img src="{% static 'images/home_thumbnail/dp_polygon.png' %}" width="350" height="263" alt="dp">
         <div style="padding: 10px">
-        <h2 class="text-center">DP 2014-34</h2>
+        <h2 class="text-center">DP Mumbai 2014-34</h2>
 
         <div id="demo1" class="collapse">
             
@@ -131,6 +131,38 @@
 
         {% endif %}
         {% endfor %}
+
+
+<!-- GOA Theme -->
+        {% for group in user.groups.all %}
+        {% if group.name ==  'goa' or group.name == 'restricted' or group.name == 'admin'   %}
+        
+        
+        
+            <div class = "container" id="mydiv" style="float:left;">
+        
+        
+                <img src="{% static 'images/home_thumbnail/goa.png' %}" width="350" height="263" alt="swm">
+                <div style="padding: 10px">
+                <h2 class="text-center">Goa census maps</h2>
+        
+                <div id="demo_goa" class="collapse">
+                        We put together the geography of Goa with following datasets : census 2011 ( village amenities, household amenities, town amenities) and watersheds of two main waterplants OPA and Ganjem.
+                </div>
+                <div class="text-center" style="padding-top: 5px">
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo_goa">View information</button>
+        
+                <a href="{% url 'goa' %}" class="btn btn-success">Maps</a>
+                <a href="#" class="btn btn-primary">Resources</a>
+        
+                </div>
+                </div>
+                </div>
+        
+                {% endif %}
+                {% endfor %}
+
+
 
 
 
