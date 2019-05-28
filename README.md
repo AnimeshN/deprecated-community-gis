@@ -14,7 +14,7 @@ This is inspired by ideas as in 'p2p governance' of Bowens ( https://blog.p2pfou
 
 :man: clone your repo locally
 
-:old_man: install postgresql
+:older_man: install postgresql
 
 ```
 sudo apt-get install postgresql
