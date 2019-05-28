@@ -6,10 +6,19 @@
   width: 40%;
   border: 3px solid ##ffe6cc;
   padding-top: 150px;
-  height: 800px; 
+  height: 100%; 
 
 }
 </style>
+
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-5"></h1>
+      <p class="">You can login as guest and explore all themes in dashboard but you won't have download or upload rights.<br>Username:<b>guest</b><br>Password:<b>pass@guest</b><br>
+      <hr>Please use your gmail id to login and get full access of your desired theme.
+      </p>
+    </div>
+  </div>
 <div class="container .col-sm- centers">
 <form method = 'POST'>
         {% csrf_token %}
@@ -31,4 +40,7 @@
     <button class="btn btn-primary">Login using gmail</button>
   </a><br>
 </div>
+
+
+
 {%endblock%}
