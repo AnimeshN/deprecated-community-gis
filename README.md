@@ -12,9 +12,9 @@ This is inspired by ideas as in 'p2p governance' of Bowens ( https://blog.p2pfou
 
 :baby: fork the repo
 
-:gentleman: clone your repo locally
+:man: clone your repo locally
 
-:grandlady: install postgresql
+:old_man: install postgresql
 
 ```
 sudo apt-get install postgresql
