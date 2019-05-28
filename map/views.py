@@ -107,6 +107,9 @@ def health(request):
 def water(request):
     return render(request,'map/ruralwater.html')
 
+def goaMaps(request):
+    return render(request,'map/goa_maps.html')
+
 def upload_layers(request):
     if request.method == 'POST':
         form = LayersForm(request.POST, request.FILES)

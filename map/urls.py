@@ -27,6 +27,7 @@ urlpatterns = [
     path('home/water/',views.water,name = 'water'),
     path('home/transport/',views.transport,name = 'transport'),
     path('home/dp_2014_34/',views.dp_2014_34,name = 'dp_2014_34'),
+    path('home/goa_maps/',views.goaMaps,name = 'goa'),
 
 
     path('uploadlayer/',views.upload_layers,name='upload_layers'),

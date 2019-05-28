@@ -133,6 +133,38 @@
         {% endfor %}
 
 
+<!-- GOA Theme -->
+        {% for group in user.groups.all %}
+        {% if group.name ==  'goa' or group.name == 'restricted' or group.name == 'admin'   %}
+        
+        
+        
+            <div class = "container" id="mydiv" style="float:left;">
+        
+        
+                <img src="{% static 'images/home_thumbnail/swm.png' %}" width="350" height="263" alt="swm">
+                <div style="padding: 10px">
+                <h2 class="text-center">Goa Maps</h2>
+        
+                <div id="demo_goa" class="collapse">
+                        We put together the geography of Goa with following datasets : census 2011 ( village amenities, household amenities, town amenities) and watersheds of two main waterplants OPA and Ganjem.
+                </div>
+                <div class="text-center" style="padding-top: 5px">
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo_goa">View information</button>
+        
+                <a href="{% url 'goa' %}" class="btn btn-success">Maps</a>
+                <a href="#" class="btn btn-primary">Resources</a>
+        
+                </div>
+                </div>
+                </div>
+        
+                {% endif %}
+                {% endfor %}
+
+
+
+
 
     {% for group in user.groups.all %}
     {% if group.name  == 'edu' or group.name == 'restricted' or group.name == 'admin'   %}
