@@ -223,6 +223,7 @@ function downloadLayers(){
 var listOfDistrict = ['All','Akola','Amrawati','Buldana','Yavatmal','Washim','Aurangabad','Beed','Jalna','Osmanabad','Nanded','Latur','Parbhani','Hingoli','Mumbai City','Mumbai Suburban','Thane','Palghar','Raigad','Ratnagiri','Sindhudurg','Bhandara','Gadchiroli','Gondia','Nagpur','Wardha','Ahmednagar','Dhule','Jalgaon','Nandurbar','Nashik','Kolhapur','Pune','Sangli','Satara','Solapur'];
 
 var villageLayerCode = ['geonode:village_2700','geonode:v_akola','geonode:v_amravati','geonode:v_buldana','geonode:v_yavatmal','geonode:v_washim','geonode:v_aurangabad','','geonode:v_jalna','geonode:v_osmanabad','geonode:v_nanded','geonode:v_latur','geonode:v_parbhani','geonode:v_hingoli','','','geonode:v_thane','','','geonode:v_ratnagiri','geonode:v_sindhudurg','geonode:v_bhandara','geonode:v_gadchiroli','','geonode:v_nagpur','geonode:v_wardha','','geonode:v_dhule','geonode:v_jalgaon','geonode:v_nandurbar','geonode:v_nashik','geonode:v_kolhapur','geonode:v_pune','geonode:v_sangli','geonode:v_satara','geonode:v_solapur'];
+var houseLayerCode = ['','','','geonode:h_buldhana','geonode:h_yavatmal','geonode:h_washim','','geonode:h_beed','','geonode:h_osmanabad','geonode:h_nanded','','geonode:h_parbhani','','geonode:h_mumbai city','geonode:h_mumbai suburban','geonode:h_thane','geonode:h_palghar','geonode:h_raigarh','geonode:h_ratnagiri','geonode:h_sindhudurg','','','geonode:h_gondia','geonode:h_nagpur','geonode:h_wardha','','','','geonode:h_nandurbar','geonode:h_nashik','','geonode:h_pune','geonode:h_sangli','geonode:h_satara','geonode:h_solapur'];
 
 
 
@@ -230,7 +231,8 @@ var districtLat = [19.0760,20.7002,20.9374,20.4561,20.3888,20.1390,19.8762,18.98
 var districtLong = [72.8777,77.0082,77.7796,76.3637,78.1204,77.1025,75.3433,75.7601,75.8800,76.1784,77.3210,76.5604,76.6413,77.1025,72.8561,72.8752,72.9781,72.7655,73.1822,73.3120,73.5594,79.8297,80.2767,80.2210,79.0882,78.6022,74.7480,74.7749,75.5626,74.1240,73.7898,74.2433,73.8567,74.5815,74.0183,74.0183,];
 var districtZoom = [7,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9];
 
-var townLayerCode= ['','geonode:t_akola','','geonode:t_buldana','','','geonode:t_aurangabad','geonode:t_bid','','','','','','','','','','','','','','geonode:t_bhandara','geonode:t_gadchiroli','','','','geonode:t_ahmadnagar','geonode:t_dhule','','','','','','','',''];
+var townLayerCode= ['','','geonode:t_amravati','','geonode:t_yavatmal','','','geonode:t_beed','geonode:t_jalna','geonode:t_osmanabad','geonode:t_nanded','geonode:t_latur','geonode:t_parbhani','geonode:t_hingoli','','','geonode:t_thane','geonode:t_palghar','geonode:t_raigarh','geonode:t_ratnagiri','geonode:t_sindhudurg',' ',' ','geonode:t_gondiya','geonode:t_nagpur','geonode:t_wardha',' ',' ','geonode:t_jalgoan','geonode:t_nandurbar','geonode:t_nashik','geonode:t_kolhapur','geonode:t_pune','geonode:t_sangli','geonode:t_satara','geonode:t_solapur',];
+
 
 var demoLayerCode = ['','geonode:d_akola_1','geonode:d_amravati_1','geonode:d_buldhana_1','geonode:d_yavatmal','geonode:d_washim_1','geonode:d_aurangabad','geonode:d_beed_1','geonode:d_jalna_1','geonode:d_osmanabad','geonode:d_nanded_1','geonode:d_latur_1','','geonode:d_hingoli_1','geonode:d_mumbai_city_1','geonode:d_mumbai_suburban_1','geonode:d_thane','geonode:d_palghar','geonode:d_raigarh_1','geonode:d_ratnagiri_1','geonode:d_sindhudurg_1','geonode:d_bhandara_1','geonode:d_gadchiroli','geonode:d_gondia_1','geonode:d_nagpur_1','geonode:d_wardha_1','geonode:d_ahmadnagar_1','geonode:d_dhule_1','geonode:d_jalgaon_1','geonode:d_nandurbar_2','geonode:d_nashik_1','geonode:d_kolhapur','geonode:d_pune_1','geonode:d_sangli_1','','geonode:d_solapur_1'];
 
@@ -253,25 +255,37 @@ function addMyNewLayers(amenity,dis){
     }else{
         source.getLayer(villageLayerCode[index]).addTo(mymap);
         myDistrictLayerList.push(villageLayerCode[index]);
+        }
     }
-  }else if(amenity == 'Town Amenities'){
+    else if(amenity == 'Household Amenities'){
+    if(houseLayerCode[index] == ''){
+        alert('layer of '+ dis + ' not found');
+    }else{
+        source.getLayer(houseLayerCode[index]).addTo(mymap);
+        myDistrictLayerList.push(houseLayerCode[index]);
+        } 
+    }
+
+    else if(amenity == 'Town Amenities'){
     if(townLayerCode[index] == ''){
         alert('layer of '+ dis + ' not found');
     }else{
         source.getLayer(townLayerCode[index]).addTo(mymap);
         myDistrictLayerList.push(townLayerCode[index]);
-    }  }else if(amenity == 'Demographies'){
+        }  
+    }
+    else if(amenity == 'Demographies'){
     if(demoLayerCode[index] == ''){
         alert('layer of '+ dis + ' not found');
     }else{
         source.getLayer(demoLayerCode[index]).addTo(mymap);
         myDistrictLayerList.push(demoLayerCode[index]);
-    }  }
-
+        } 
+    }
 
     else{
     alert('Data for '+amenity+' not Populated');
-  }
+    }
    
 
 }
@@ -290,19 +304,33 @@ function downloadTheseLayers(anemity,dis){
     }else{
     geonodecode = villageLayerCode[index];
     }
-  }else if(anemity == 'Town Amenities'){
+}
+  
+  else if(anemity == 'Town Amenities'){
     if(townLayerCode[index] == ''){
         alert('layer of '+ dis + ' not found');
     }else{
     geonodecode = townLayerCode[index];
     }
-  }else if(anemity == 'Demographies'){
+}
+  
+  else if(anemity == 'Demographies'){
     if(demoLayerCode[index] == ''){
         alert('layer of '+ dis + ' not found');
     }else{
     geonodecode = demoLayerCode[index];
     }
+}
+    
+    
+else if(anemity == 'Household Amenities'){
+    if(houseLayerCode[index] == ''){
+        alert('layer of '+ dis + ' not found');
+    }else{
+    geonodecode = houseLayerCode[index];
     }
+}
+
     else{
     alert('Data for '+anemity+' not Populated');
     }
