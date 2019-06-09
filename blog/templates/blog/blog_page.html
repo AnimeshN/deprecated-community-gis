@@ -1,0 +1,23 @@
+{% extends 'map/base.html' %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+      
+    <div class="container">
+        <h2>{{ page.title }} <small><small>{{ page.description }}</small></small></h2>
+       
+
+       
+
+        <ul class="list-group">
+            <li class="list-group-item active">Posts</li>
+            {% for post in page.get_children %}
+            <li class="list-group-item"><a href="{% pageurl post %}">{{ post.title }}</a></li>
+            {% endfor %}
+          </ul>
+
+         
+       
+      </div>
+
+{% endblock %}
