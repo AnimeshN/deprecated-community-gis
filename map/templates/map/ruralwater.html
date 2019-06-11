@@ -29,6 +29,7 @@
     <script>
      var myLayerList = [];
     function putLayer(geonode_source){
+        console.log('jjj');
         mymap.setView([19.6936, 72.7655], 9);
         var index = myLayerList.indexOf(geonode_source);
         if(index >= 0){
@@ -37,7 +38,7 @@
             myLayerList.splice(index,1);
 
         }else{
-            console.log('add'+geonode_source);
+            console.log('add:::::'+geonode_source);
             // info.toFront(geonode_);
             source.getLayer(geonode_source).addTo(mymap);
             myLayerList.push(geonode_source);
@@ -56,7 +57,7 @@
 var mymap;
             
             var source = L.wms.source(
-                "http://13.82.229.27/geoserver/wfs",
+                "http://13.82.229.27/geoserver/wms",
                 {
                     "format": "image/png",
                     "transparent": "true"

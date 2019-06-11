@@ -1,0 +1,88 @@
+{% extends 'map/base.html' %}
+
+{% load wagtailcore_tags %}
+
+{% block contents %}
+    
+
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags%}
+
+
+{% block content %}
+<style>
+.column {
+    width: 50%;
+    padding: 10px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  </style>
+ 
+  
+  
+<div  class="container">
+    <div style="text-align: center"><h1>{{ page.title }}</h1></div>
+    <div>
+           
+            <div class="row">
+              <div class="column text-left" >
+                <i>by:</i>{{ page.author }}
+               
+              </div>
+              <div class="column text-right" >
+                <i>posted on:</i>{{ page.created|date:"M d, Y" }}
+                
+              </div>
+            </div>
+          
+    
+        
+    </div>    
+    <hr>
+     
+
+    <div style="width:500px;height:500px;margin: 0 auto;">
+    {% image page.post_image max-1000x500 %}
+    </div>
+
+    <hr>
+    <div >
+    {{ page.body|richtext }}
+    </div>
+    
+    
+    <div class="row">
+            <div class="column text-left">
+                    {% if page.get_prev_sibling %}
+                    <p><a href="{{ page.get_prev_sibling.url }}">previous post</a></p>
+                    {% endif %}
+             
+            </div>
+            <div class="column text-right">
+                    {% if page.get_next_sibling %}
+                    <p><a href="{{ page.get_next_sibling.url }}">next post</a></p>
+                    {% endif %}
+                    
+              
+            </div>
+          </div>
+
+    <div style="text-align: center;">
+
+    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+    </div>
+     </div>
+     
+  
+{% endblock %}
+  
+
+   
+
+{% endblock contents %}
