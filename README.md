@@ -29,9 +29,9 @@ source VIRTUALENVNAME/bin/activate
 ```
 :speak_no_evil: install dependencies
 ```
-python3 install -r requirments.txt
+pip3 install -r requirments.txt
 or
-python3 install django psycopg2 social-auth-app-django
+pip3 install django psycopg2 social-auth-app-django
 ```
 :skull: setup database using [postgres-setup.txt](postgres-setup.txt)
 
