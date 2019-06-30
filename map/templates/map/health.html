@@ -25,12 +25,12 @@
 <ul class="list-group">
     <li class="list-group-item list-group-item-info"><b>Malegaon</b></li>
 
-    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:malegaon_wards')";>Wards</button></li>
-    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:anganwadi')";>Aganwadi</button></li>
-    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:health')";>health</button></li>
-    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:school')";>School</button></li>
-    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:town_boundary_1')";>Town boundary 1</button></li>
-    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:town_boundary_2')";>Town boundary 2</button></li>
+    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:malegaon_merged_1')";>Wards</button></li>
+    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:urban_anganwadi_1')";>Aganwadi</button></li>
+    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:urban_health_1')";>health</button></li>
+    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:urban_school_1')";>School</button></li>
+    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:town_boundar_malegaon_2')";>Town boundary 1</button></li>
+    <!-- <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:town_boundary_2')";>Town boundary 2</button></li> -->
  </ul> 
 
  <ul class="list-group">
@@ -92,7 +92,7 @@
    
 
                 var source = L.wms.source(
-                    "http://13.82.229.27/geoserver/wfs",
+                    "http://104.210.61.129/geoserver/wfs",
                     {
                         "format": "image/png",
                         "transparent": "true"
