@@ -51,10 +51,10 @@
         <div class="content">
                 <button class="collapsible">Mumbai Census Boundary</button>
                 <div class="content">
-                    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:h_mumbai_suburban')";>Suburban</button></li>
-                    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:h_mumbai_city')";>City</button></li>
+                    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:mumbai_sub_census')";>Suburban</button></li>
+                    <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:mumbai_city_census')";>City</button></li>
                 </div>
-                <button class="collapsible" onclick="putLayer('geonode:constituency_ward_boundary')">Corporator Ward Boundary</button>
+                <button class="collapsible" onclick="putLayer('geonode:ward_boundaries_after_cleaning_1')">Corporator Ward Boundary</button>
                 <div class="content">
                         <!--li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:constituency_ward_boundary')";>Update in Progress....</button></li-->
                 </div>
@@ -67,7 +67,7 @@
                         <!--li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:constituency_ward_boundary')";>Update in Progress....</button></li-->
                 </div>
 
-                <button class="collapsible"  onclick="putLayer('geonode:mumbai_ward_boundary_20may19')" >Mumbai Ward Boundary</button>
+                <button class="collapsible"  onclick="putLayer('geonode:mumbai_ward_boundary_10jun')" >Mumbai Ward Boundary</button>
                 <div class="content">
                         <!--li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Update in Progress....</button></li-->
                 </div>
@@ -84,7 +84,7 @@
                             </div>
                             <button class="collapsible">OSM buildings</button>
                             <div class="content">
-                                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:osm_building_l_ward')";>L-Ward</button></li>
+                                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:missing')";>L-Ward</button></li>
                             </div>
                             <button class="collapsible">Chawls</button>
                             <div class="content">
@@ -180,7 +180,7 @@
                     </div>
                     <button class="collapsible">Others</button>
                         <div class="content">
-                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:l_ward_village_boundary_20may19')";>Village Boundary</button></li>
+                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Village Boundary</button></li>
                 <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:planning_sector_l_ward')";>Planning Sector</button></li>
                 <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:l_ward_rivers_poly')";>River</button></li>
                 <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:railway_tracks_l_ward')";>Railway Track-Station</button></li>
@@ -189,7 +189,7 @@
                 <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:high_voltage_lines_l_ward')";>High Voltage Line</button></li>
                 <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:buffer_for_railway_l_ward')";>Buffer For Railway</button></li>
                 <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:buffer_for_high_voltage_lines_l_ward')";>Buffer For High Voltage Line</button></li>
-                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:high_voltage_lines_l_ward')";>High Tide Line</button></li>
+                <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:high_tide_line_l_ward')";>High Tide Line</button></li>
                 <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:crz_buffer')";>CRZ Buffer</button></li>
                 <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Update in Progress....</button></li>
                         </div>
@@ -618,7 +618,7 @@ for (i = 0; i < coll.length; i++) {
 var mymap;
             
             var source = L.wms.source(
-                "http://13.82.229.27/geoserver/wfs",
+                "http://104.210.61.129/geoserver/wfs",
                 {
                     "format": "image/png",
                     "transparent": "true"

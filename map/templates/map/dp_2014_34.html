@@ -47,10 +47,10 @@
 <ul class="list-group">
         <button class="collapsible">Mumbai Census Boundary</button>
         <div class="content">
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:h_mumbai_suburban')";>Suburban</button></li>
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:h_mumbai_city')";>City</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:mumbai_sub_census')";>Suburban</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:mumbai_city_census')";>City</button></li>
         </div>
-        <button class="collapsible" onclick="putLayer('geonode:constituency_ward_boundary')">Corporator Ward Boundary</button>
+        <button class="collapsible" onclick="putLayer('geonode:ward_boundaries_after_cleaning_1')">Corporator Ward Boundary</button>
         <div class="content">
                 <!--li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:constituency_ward_boundary')";>Update in Progress....</button></li-->
         </div>
@@ -65,7 +65,7 @@
         </div>
 
 
-        <button class="collapsible"  onclick="putLayer('geonode:mumbai_ward_boundary_20may19')" >Mumbai Ward Boundary</button>
+        <button class="collapsible"  onclick="putLayer('geonode:mumbai_ward_boundary_10jun')" >Mumbai Ward Boundary</button>
         <div class="content">
                 <!--li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Update in Progress....</button></li-->
         </div>
@@ -73,9 +73,9 @@
     <button class="collapsible">L-Ward</button>
         <div class="content">
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:planning_sector_l_ward')";>Planning Sector</button></li>
-
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Villge Boundary</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:l_ward_15may')";>DP Polygons</button></li>
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:osm_building_l_ward')";>OSM Buildings</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:missing')";>OSM Buildings</button></li>
 
             <!--li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:s_ward_village_boundary_15jan_dhiraj')";>Village Boundary</button></li-->
 
@@ -95,7 +95,7 @@
 
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:buffer_for_railway_l_ward')";>Buffer For Railway</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:buffer_for_high_voltage_lines_l_ward')";>Buffer For High Voltage Line</button></li>
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:high_voltage_lines_l_ward')";>High Tide Line</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:high_tide_line_l_ward')";>High Tide Line</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:crz_buffer')";>CRZ Buffer</button></li>
             
         </div>
@@ -117,14 +117,25 @@
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:s_ward_buffer_for_high_voltage_line_17jan_kajal')";>Buffer For High Voltage Line</button></li>
             
         </div>
+        <!--FS-Ward Start Here-->>
+        <button class="collapsible">F South-ward</button>
+        <div class="content">
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:fs_ward_ward_boundaries')";>Ward Boundary</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:fs_ward_ground')";>Ground</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:fs_ward_point_3july')";>Geo Location</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:s_ward_slum_baundry_3july_kajal')";>Slum Boundary</button></li>
+                
+        </div>
+
+
     <!--HWest-ward start here-->
-    <button class="collapsible">HWest-ward</button>
+    <button class="collapsible">H West-ward</button>
         <div class="content">
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:hw_ward_workinprogress')";>DP Polygons In Progress....</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Update in Progress....</button></li>
         </div>
     <!--MWest-ward start here-->
-    <button class="collapsible">MWest-ward</button>
+    <button class="collapsible">M West-ward</button>
         <div class="content">
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ward_polygon_mw')";>DP Polygons</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Update in Progress....</button></li>
@@ -154,7 +165,7 @@
     $('.select').click(function () {
         $(this).toggleClass('highlight')
     })
-
+s
 
 var coll = document.getElementsByClassName("collapsible");
 var i;
@@ -177,7 +188,7 @@ for (i = 0; i < coll.length; i++) {
 var mymap;
             
             var source = L.wms.source(
-                "http://13.82.229.27/geoserver/wfs",
+                "http://104.210.61.129/geoserver/wfs",
                 {
                     "format": "image/png",
                     "transparent": "true"
