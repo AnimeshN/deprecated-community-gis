@@ -73,9 +73,9 @@
     <button class="collapsible">L-Ward</button>
         <div class="content">
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:planning_sector_l_ward')";>Planning Sector</button></li>
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Villge Boundary</button></li>
+
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:l_ward_15may')";>DP Polygons</button></li>
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:missing')";>OSM Buildings</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:osm_building_l_ward')";>OSM Buildings</button></li>
 
             <!--li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:s_ward_village_boundary_15jan_dhiraj')";>Village Boundary</button></li-->
 
@@ -87,7 +87,7 @@
 
             <!--li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:s_ward_pond_18th_jan_digvijay')";>Ponds</button></li-->
 
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:metro_line_1_l_ward')";>Metro Rail Line-1</button></li>
+            <li class="list-group-item list-group-item-info"><bconstituency_ward_boundaryutton class="btn select" onclick="putLayer('geonode:metro_line_1_l_ward')";>Metro Rail Line-1</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:metro_line_2_3_l_ward')";>Metro Rail Line-2,3</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:high_voltage_lines_l_ward')";>High Voltage Line</button></li>
 
@@ -117,25 +117,24 @@
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:s_ward_buffer_for_high_voltage_line_17jan_kajal')";>Buffer For High Voltage Line</button></li>
             
         </div>
+
         <!--FS-Ward Start Here-->
         <button class="collapsible">F South-ward</button>
         <div class="content">
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:fs_ward_ward_boundaries')";>Ward Boundary</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:fs_ward_ground')";>Ground</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:fs_ward_point_3july')";>Geo Location</button></li>
-            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:s_ward_slum_baundry_3july_kajal')";>Slum Boundary</button></li>
+            <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:under_development')";>Under Development</button></li>
                 
         </div>
-
-
     <!--HWest-ward start here-->
-    <button class="collapsible">H West-ward</button>
+    <button class="collapsible">HWest-ward</button>
         <div class="content">
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:hw_ward_workinprogress')";>DP Polygons In Progress....</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Update in Progress....</button></li>
         </div>
     <!--MWest-ward start here-->
-    <button class="collapsible">M West-ward</button>
+    <button class="collapsible">MWest-ward</button>
         <div class="content">
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:ward_polygon_mw')";>DP Polygons</button></li>
             <li class="list-group-item list-group-item-info"><button class="btn select" onclick="putLayer('geonode:')";>Update in Progress....</button></li>
@@ -165,7 +164,7 @@
     $('.select').click(function () {
         $(this).toggleClass('highlight')
     })
-s
+
 
 var coll = document.getElementsByClassName("collapsible");
 var i;
